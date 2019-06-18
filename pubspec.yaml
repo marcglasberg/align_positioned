@@ -1,0 +1,19 @@
+name: align_positioned
+description: A widget that aligns, positions and optionally sizes its child within itself.
+version: 1.0.7
+author: Marcelo Glasberg <marcglasberg@gmail.com>
+homepage: https://github.com/marcglasberg/align_positioned
+
+environment:
+  sdk: ">=2.0.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+
