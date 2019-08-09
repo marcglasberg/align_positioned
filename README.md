@@ -1,8 +1,64 @@
 # align_positioned
 
-A widget that aligns, positions and optionally sizes its child within itself. 
+**Why is this widget an indispensable tool?** 
 
-## Align and Position 
+When your desired layout feels too complex for Columns and Rows, `AlignPositioned` widget is a real life saver.
+Flutter is very composable, which is good, but sometimes it's unnecessarily complex to translate some layout 
+requirement into a composition of simpler widgets. 
+
+The `AlignPositioned` aligns, positions and optionally sizes its child 
+in relation to both the container and the child itself.
+In other words, it lets you easily and **declaratively** 
+define the position and size of some widget in relation to another. 
+
+For example, *you can tell it to position the top-left of its child at 15 pixels
+to the left of the top-left corner of the container, 
+plus move it two thirds of the child's height to the bottom plus 10 pixels.*
+Do you even know how to start doing this by composing basic Flutter widgets?
+Maybe, but with `AlignPositioned` it's much easier, and it takes a single widget.
+
+The `AlignPositioned` widget is specially helpful for **animations**, 
+since you can just calculate the final position and size you want for each frame. 
+Without it you may find yourself having to animate a composition of widgets.
+
+## How it works 
+
+Add align_positioned [as a dependency](https://pub.dartlang.org/packages/align_positioned#-installing-tab-) 
+in your `pubspec.yaml` file,
+then import it:
+
+    import 'package:align_positioned/align_positioned.dart';
+
+Pass the `AlignPositioned` a `child`, and then one or more of the following parameters:
+ 
+    AlignPositioned(
+       child: child,           
+       alignment: ...,
+       dx: ...,
+       dy: ...,
+       moveByChildWidth: ...,
+       moveByChildHeight: ...,
+       moveByContainerWidth: ...,
+       moveByContainerHeight: ...,
+       childWidth: ...,
+       childHeight: ...,
+       minChildWidth: ...,
+       minChildHeight: ...,
+       maxChildWidth: ...,
+       maxChildHeight: ...,
+       childWidthRatio: ...,
+       childHeightRatio: ...,
+       minChildWidthRatio: ...,
+       minChildHeightRatio: ...,
+       maxChildWidthRatio: ...,
+       maxChildHeightRatio: ...,
+       wins: ...,
+       touch: ...,       
+       ); 
+   
+Let's study each parameter in detail:
+        
+## Align and Position parameters
 
 The `alignment` parameter works as expected. For example, 
 `Alignment.bottomRight` represents the bottom right of the container, 
@@ -65,7 +121,7 @@ for the effects seen below:
 
 ![alt text](./example/alignPos3.png)
 
-## Sizing
+## Size Parameters
 
 Optionally, you can also define the child size:
 
@@ -112,13 +168,5 @@ Optionally, you can also define the child size:
    If `wins` is `Wins.max`, the maximum size will be used.
 
 
-## Usage
 
-### Import the package
-
-First, add align_positioned [as a dependency](https://pub.dartlang.org/packages/align_positioned#-installing-tab-) in your pubspec.yaml
-
-Then, import it:
-
-    import 'package:align_positioned/align_positioned.dart';
 
