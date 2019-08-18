@@ -48,6 +48,7 @@ class AlignPositioned extends SingleChildRenderObjectWidget {
 
   const AlignPositioned({
     Key key,
+    Widget child,
     this.alignment = Alignment.center,
     this.dx = 0.0,
     this.dy = 0.0,
@@ -69,11 +70,89 @@ class AlignPositioned extends SingleChildRenderObjectWidget {
     this.maxChildHeightRatio,
     this.wins = Wins.min,
     this.touch = Touch.inside,
-    Widget child,
   })  : assert(alignment != null),
         assert(childWidth == null || childWidthRatio == null),
         assert(childHeight == null || childHeightRatio == null),
         super(key: key, child: child);
+
+  /// Use this if you put an [AlignPositioned] inside of a [Stack].
+  /// The [AlignPositioned] will then expand and fix itself to the corners
+  /// of the [Stack]. The [Stack] will size itself to their other
+  /// non-positioned widgets, and then you can use the [AlignPositioned]
+  /// to position its child in relation to the [Stack].
+  ///
+  /// Example:
+  /// ```
+  /// Stack(
+  ///   children: [
+  ///     AlignPositioned.expand(child:...),
+  ///     ...
+  ///     ]);
+  /// ```
+  ///
+  /// Note the [Stack] documentation contains this text:
+  /// ```
+  /// In particular, when using a [Stack] you can't position
+  /// children relative to their size or the stack's own size.
+  /// ```
+  ///
+  /// However, using [AlignPositioned] like this will allow you precisely that:
+  /// to position (and size) children relative to their size or the stack's own size.
+  ///
+  static Positioned expand({
+    Key key,
+    Widget child,
+    Alignment alignment = Alignment.center,
+    double dx = 0.0,
+    double dy = 0.0,
+    double moveByChildWidth = 0.0,
+    double moveByChildHeight = 0.0,
+    double moveByContainerWidth = 0.0,
+    double moveByContainerHeight = 0.0,
+    double childWidth,
+    double childHeight,
+    double minChildWidth,
+    double minChildHeight,
+    double maxChildWidth,
+    double maxChildHeight,
+    double childWidthRatio,
+    double childHeightRatio,
+    double minChildWidthRatio,
+    double minChildHeightRatio,
+    double maxChildWidthRatio,
+    double maxChildHeightRatio,
+    Wins wins = Wins.min,
+    Touch touch = Touch.inside,
+  }) =>
+      Positioned(
+          top: 0,
+          right: 0,
+          left: 0,
+          bottom: 0,
+          child: AlignPositioned(
+            child: child,
+            alignment: alignment,
+            dx: dx,
+            dy: dy,
+            moveByChildWidth: moveByChildWidth,
+            moveByChildHeight: moveByChildHeight,
+            moveByContainerWidth: moveByContainerWidth,
+            moveByContainerHeight: moveByContainerHeight,
+            childWidth: childWidth,
+            childHeight: childHeight,
+            minChildWidth: minChildWidth,
+            minChildHeight: minChildHeight,
+            maxChildWidth: maxChildWidth,
+            maxChildHeight: maxChildHeight,
+            childWidthRatio: childWidthRatio,
+            childHeightRatio: childHeightRatio,
+            minChildWidthRatio: minChildWidthRatio,
+            minChildHeightRatio: minChildHeightRatio,
+            maxChildWidthRatio: maxChildWidthRatio,
+            maxChildHeightRatio: maxChildHeightRatio,
+            wins: wins,
+            touch: touch,
+          ));
 
   @override
   _RenderAlignPositionedBox createRenderObject(BuildContext context) {

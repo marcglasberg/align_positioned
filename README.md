@@ -167,6 +167,41 @@ Optionally, you can also define the child size:
    If `wins` is `Wins.min`, the default, the minimum size will be used.  
    If `wins` is `Wins.max`, the maximum size will be used.
 
+## Using AlignPositioned inside of a Stack
+
+The `Stack` documentation contains this text:
+
+> _In particular, when using a Stack you can't position
+> children relative to their size or the stack's own size._
+
+However, by using `AlignPositioned` you can do precisely that:
+position (and size) children relative to their size or the stack's own size.
+
+To put an `AlignPositioned` inside of a `Stack` you must use `AlignPositioned.expand()`.
+The `AlignPositioned` will then expand and fix itself to the corners of the `Stack`. 
+The `Stack` will size itself to their other non-positioned widgets, 
+and then you can use the `AlignPositioned` to position its child in relation to the `Stack`.
+
+Example:
+```
+Stack(
+  children: [
+    AlignPositioned.expand(child:..., childWidthRatio:...),
+    ...
+    ]);
+```                  
+
+You can put as many `AlignPositioned` inside of a `Stack` as you want. 
+
+
+***
+
+*Other Flutter packages I've authored:* 
+* <a href="https://pub.dev/packages/async_redux">async_redux</a>
+* <a href="https://pub.dev/packages/network_to_file_image">network_to_file_image</a>
+* <a href="https://pub.dev/packages/back_button_interceptor">back_button_interceptor</a>
+* <a href="https://pub.dev/packages/indexed_list_view">indexed_list_view</a> 
+* <a href="https://pub.dev/packages/animated_size_and_fade">animated_size_and_fade</a>
 
 
 
