@@ -1,5 +1,6 @@
 import 'package:align_positioned/align_positioned.dart';
 import 'package:flutter/material.dart';
+import 'package:matrix4_transform/matrix4_transform.dart';
 
 void main() async => runApp(MaterialApp(home: Demo()));
 
@@ -51,7 +52,7 @@ class Demo extends StatelessWidget {
                   width: 150,
                   height: 150,
                   color: Colors.yellow,
-                  child: Stack(children: circlesWithmoveByChildWidthAndmoveByChildHeightInside())),
+                  child: Stack(children: circlesWithDWidthAndDHeightInside())),
               //
               SizedBox(height: 50),
               //
@@ -59,14 +60,14 @@ class Demo extends StatelessWidget {
                   width: 150,
                   height: 150,
                   color: Colors.yellow,
-                  child: Stack(children: circlesWithmoveByChildWidthAndmoveByChildHeightOutside())),
+                  child: Stack(children: circlesWithDWidthAndDHeightOutside())),
               //
               SizedBox(height: 80),
               //
               Container(
                 width: 150,
                 height: 150,
-                color: Colors.red,
+                color: Colors.blue,
                 child: Stack(
                   children: <Widget>[
                     AlignPositioned(
@@ -78,6 +79,24 @@ class Demo extends StatelessWidget {
                       child: circle(Color(0x50000000), 60.0),
                     ),
                     AlignPositioned(
+                      touch: Touch.inside,
+                      alignment: Alignment.topLeft,
+                      dx: 15.0,
+                      moveByChildWidth: -0.5,
+                      moveByChildHeight: -0.5,
+                      child: circle(Colors.white, 5.0),
+                    ),
+                    AlignPositioned(
+                      rotateDegrees: 180,
+                      touch: Touch.inside,
+                      alignment: Alignment.topLeft,
+                      dx: 15.0,
+                      moveByChildWidth: -0.5,
+                      moveByChildHeight: -0.5,
+                      child: circle(Color(0x50000000), 60.0),
+                    ),
+                    AlignPositioned(
+                      rotateDegrees: 180,
                       touch: Touch.inside,
                       alignment: Alignment.topLeft,
                       dx: 15.0,
@@ -118,6 +137,175 @@ class Demo extends StatelessWidget {
                       child: circle(Colors.white, 5.0),
                     ),
                   ],
+                ),
+              ),
+              //
+              SizedBox(height: 50),
+              //
+              Container(
+                width: 150,
+                height: 150,
+                color: Colors.green,
+                child: Stack(
+                  children: <Widget>[
+                    for (double i = 0; i < 360 * 2; i += 5)
+                      AlignPositioned(
+                        alignment: Alignment.center,
+                        rotateDegrees: i,
+                        touch: Touch.inside,
+                        moveByContainerWidth: 0.5 / 2 / 360 * i,
+                        childWidthRatio: 0.5 / 2 / 360 * i,
+                        childHeightRatio: 0.5 / 2 / 360 * i,
+                        child: circle(Colors.white, 15.0),
+                      )
+                  ],
+                ),
+              ),
+              //
+              SizedBox(height: 50),
+              //
+              Container(
+                width: 150,
+                height: 150,
+                color: Colors.green,
+                child: Stack(
+                  children: <Widget>[
+                    for (double i = 0; i < 360; i += 45)
+                      AlignPositioned(
+                        alignment: Alignment.center,
+                        rotateDegrees: i,
+                        child: Container(color: Colors.black, width: 60, height: 6),
+                      ),
+                    for (double i = 0; i < 360; i += 45)
+                      AlignPositioned(
+                        alignment: Alignment.center,
+                        dx: 50,
+                        dy: 60,
+                        rotateDegrees: i,
+                        child: Container(color: Colors.black, width: 40, height: 8),
+                      ),
+                    for (double i = 0; i < 360; i += 5)
+                      AlignPositioned(
+                        alignment: Alignment.bottomLeft,
+                        rotateDegrees: i,
+                        child: Container(
+                            color: Colors.black.withOpacity(i / 360 * .8), width: 100, height: 10),
+                      )
+                  ],
+                ),
+              ),
+              //
+              SizedBox(height: 120),
+              //
+              Container(
+                width: 150,
+                height: 150,
+                color: Colors.purple,
+                child: Stack(
+                  children: <Widget>[
+                    AlignPositioned(
+                      alignment: Alignment.center,
+                      rotateDegrees: 45,
+                      child: Container(color: Colors.yellow, width: 60, height: 20),
+                    ),
+                    AlignPositioned(
+                      alignment: Alignment.center,
+                      matrix4Transform: Matrix4Transform().scale(2),
+                      child: Container(color: Colors.green.withOpacity(0.5), width: 60, height: 20),
+                    ),
+                    AlignPositioned(
+                      alignment: Alignment.center,
+                      rotateDegrees: 45,
+                      matrix4Transform: Matrix4Transform().scale(2),
+                      child: Container(color: Colors.red.withOpacity(0.5), width: 60, height: 20),
+                    ),
+                    AlignPositioned(
+                      alignment: Alignment.center,
+                      rotateDegrees: 45,
+                      matrix4Transform: Matrix4Transform().scale(2).rotateDegrees(90),
+                      child: Container(color: Colors.blue.withOpacity(0.5), width: 60, height: 20),
+                    ),
+                  ],
+                ),
+              ),
+              //
+              SizedBox(height: 50),
+              //
+              Container(
+                width: 150,
+                height: 150,
+                color: Colors.red,
+                child: AlignPositioned(
+                  alignment: Alignment.center,
+                  childHeightRatio: 0.5,
+                  moveByContainerHeight: 0.25,
+                  childWidth: 75,
+                  wins: Wins.min,
+                  child: Container(color: Color(0x50000000)),
+                ),
+              ),
+              //
+              SizedBox(height: 50),
+              //
+              Container(
+                width: 150,
+                height: 150,
+                color: Colors.red,
+                child: AlignPositioned(
+                  alignment: Alignment.center,
+                  childHeightRatio: 0.5,
+                  moveByChildHeight: 0.5,
+                  childWidth: 75,
+                  wins: Wins.min,
+                  child: Container(color: Color(0x50000000)),
+                ),
+              ),
+              //
+              SizedBox(height: 50),
+              //
+              Container(
+                width: 150,
+                height: 150,
+                color: Colors.red,
+                child: AlignPositioned(
+                  alignment: Alignment.center,
+                  childHeightRatio: 1.0,
+                  minChildWidthRatio: 0.66,
+                  maxChildWidthRatio: 0.33,
+                  wins: Wins.min,
+                  child: Container(color: Color(0x50000000)),
+                ),
+              ),
+              //
+              SizedBox(height: 50),
+              //
+              Container(
+                width: 150,
+                height: 150,
+                color: Colors.red,
+                child: AlignPositioned(
+                  alignment: Alignment.center,
+                  childHeightRatio: 1.0,
+                  minChildWidthRatio: 0.66,
+                  maxChildWidthRatio: 0.33,
+                  wins: Wins.max,
+                  child: Container(color: Color(0x50000000)),
+                ),
+              ),
+              //
+              SizedBox(height: 50),
+              //
+              Container(
+                width: 150,
+                height: 150,
+                color: Colors.red,
+                child: AlignPositioned(
+                  alignment: Alignment.center,
+                  childHeightRatio: 1.20,
+                  moveByContainerHeight: 0.10,
+                  childWidth: 190,
+                  wins: Wins.max,
+                  child: Container(color: Color(0x50000000)),
                 ),
               ),
               //
@@ -129,7 +317,7 @@ class Demo extends StatelessWidget {
     );
   }
 
-  List<Widget> circlesWithmoveByChildWidthAndmoveByChildHeightInside() {
+  List<Widget> circlesWithDWidthAndDHeightInside() {
     var children1 = <Widget>[];
     children1.addAll(
         circles(Colors.red, Touch.inside, 0, -1, moveByChildWidth: 0.0, moveByChildHeight: 0.0));
@@ -161,7 +349,7 @@ class Demo extends StatelessWidget {
     return children1;
   }
 
-  List<Widget> circlesWithmoveByChildWidthAndmoveByChildHeightOutside() {
+  List<Widget> circlesWithDWidthAndDHeightOutside() {
     var children1 = <Widget>[];
     children1.addAll(
         circles(Colors.red, Touch.outside, 0, -1, moveByChildWidth: 0.0, moveByChildHeight: 0.0));

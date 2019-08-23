@@ -17,3 +17,10 @@
 ## [1.1.0] - 2019/08/17
 
 * AlignPositioned inside of a Stack. 
+
+## [1.1.2] - 2019/08/23
+
+* ChildHeightRatio and childHeight may be present at the same time.
+* Rotate.
+* Transform.
+ 

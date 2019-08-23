@@ -6,14 +6,15 @@ When your desired layout feels too complex for Columns and Rows, `AlignPositione
 Flutter is very composable, which is good, but sometimes it's unnecessarily complex to translate some layout 
 requirement into a composition of simpler widgets. 
 
-The `AlignPositioned` aligns, positions and optionally sizes its child 
+The `AlignPositioned` aligns, positions, sizes, rotates and transforms its child 
 in relation to both the container and the child itself.
 In other words, it lets you easily and **declaratively** 
-define the position and size of some widget in relation to another. 
+define where and how a widget should appear in relation to another. 
 
 For example, *you can tell it to position the top-left of its child at 15 pixels
 to the left of the top-left corner of the container, 
-plus move it two thirds of the child's height to the bottom plus 10 pixels.*
+plus move it two thirds of the child's height to the bottom plus 10 pixels, 
+and then rotate 15 degrees.*
 Do you even know how to start doing this by composing basic Flutter widgets?
 Maybe, but with `AlignPositioned` it's much easier, and it takes a single widget.
 
@@ -52,6 +53,8 @@ Pass the `AlignPositioned` a `child`, and then one or more of the following para
        minChildHeightRatio: ...,
        maxChildWidthRatio: ...,
        maxChildHeightRatio: ...,
+       rotateDegrees: ...,
+       matrix4Transform: ...,
        wins: ...,
        touch: ...,       
        ); 
@@ -140,12 +143,12 @@ Optionally, you can also define the child size:
 - `childWidthRatio` is the child width, as a fraction of the container width.
    If between 0.0 and 1.0, the child will be smaller than its container.
    If more than 1.0, the child will be larger than its container. 
-   You cannot define both `childWidthRatio` and `childWidth` at the same time.
+   If you define both `childWidthRatio` and `childWidth` they will be added.
 
 - `childHeightRatio` is the child height, as a fraction of the container height.
    If between 0.0 and 1.0, the child will be smaller than its container.
-   If more than 1.0, the child will be larger than its container. 
-   You cannot define both `childHeightRatio` and `childHeight` at the same time.
+   If more than 1.0, the child will be larger than its container.
+   If you define both `childHeightRatio` and `childHeight` they will be added.   
 
 - `minChildWidthRatio` is the minimum child width, as a fraction of the container width. 
    It has precedence over `childWidth`. If both `minChildWidth` and `minChildWidthRatio` 
@@ -167,32 +170,56 @@ Optionally, you can also define the child size:
    If `wins` is `Wins.min`, the default, the minimum size will be used.  
    If `wins` is `Wins.max`, the maximum size will be used.
 
+## Rotate and Transform
+
+Optionally, you can also define rotation and transformation:
+
+- `rotateDegrees` is the rotation, in degrees (1 turn is 360 degrees).
+  The position of the axis of the rotation (the "origin") depends on the
+  `alignment` parameter and the parent. So, for example, `Alignment.center`
+  means the axis of rotation is at the center of the parent.
+  
+- `matrix4Transform` lets you apply any transformation to the child.
+   This uses Matrix4Transform instead of Matrix4, since it's easier to use.
+   However, you can still use Matrix4 directly with the constructor `Matrix4Transform.from(matrix4)`.
+
+![alt text](./example/alignPos4.png)
+
 ## Using AlignPositioned inside of a Stack
 
+A `Stack` positions its children relative to the edges of its box.
 The `Stack` documentation contains this text:
 
 > _In particular, when using a Stack you can't position
 > children relative to their size or the stack's own size._
 
 However, by using `AlignPositioned` you can do precisely that:
-position (and size) children relative to their size or the stack's own size.
+position (and size, rotate and transform) children relative to their size or the Stack's own size,
+and consequently in relation to the other widgets inside of the Stack.
 
-To put an `AlignPositioned` inside of a `Stack` you must use `AlignPositioned.expand()`.
+If you recall how a `Stack` works, each of its child widgets is either positioned or non-positioned. 
+The stack sizes itself to contain all the non-positioned children, 
+which are positioned according to the stacks's `alignment` parameter.
+Next, the positioned children are laid out. 
+
+If you use the AlignPositioned default constructor and put it inside of a Stack it will be a **non-positioned** child.
+
+To create a **positioned** widget, use the `AlignPositioned.expand()` constructor.
 The `AlignPositioned` will then expand and fix itself to the corners of the `Stack`. 
-The `Stack` will size itself to their other non-positioned widgets, 
-and then you can use the `AlignPositioned` to position its child in relation to the `Stack`.
+In other words, the `Stack` will size itself to their other non-positioned widgets, 
+and then you can use the `AlignPositioned` to layout its child in relation to the `Stack`.
 
 Example:
 ```
 Stack(
-  children: [
-    AlignPositioned.expand(child:..., childWidthRatio:...),
+  children: [      
+    Container(...),
+    Positioner(child: Container(...)),                                        
+    AlignPositioned(...),
+    AlignPositioned.expand(...),
     ...
     ]);
-```                  
-
-You can put as many `AlignPositioned` inside of a `Stack` as you want. 
-
+```                
 
 ***
 
@@ -200,8 +227,14 @@ You can put as many `AlignPositioned` inside of a `Stack` as you want.
 * <a href="https://pub.dev/packages/async_redux">async_redux</a>
 * <a href="https://pub.dev/packages/network_to_file_image">network_to_file_image</a>
 * <a href="https://pub.dev/packages/back_button_interceptor">back_button_interceptor</a>
-* <a href="https://pub.dev/packages/indexed_list_view">indexed_list_view</a> 
+* <a href="https://pub.dev/packages/indexed_list_view">indexed_list_view</a>
+* <a href="https://pub.dev/packages/matrix4_transform">matrix4_transform</a> 
 * <a href="https://pub.dev/packages/animated_size_and_fade">animated_size_and_fade</a>
+
+_https://github.com/marcglasberg<br>_
+_https://twitter.com/marcglasberg<br>_
+_https://stackoverflow.com/users/3411681/marcg<br>_
+_https://medium.com/@marcglasberg_
 
 
 

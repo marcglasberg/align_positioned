@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:matrix4_transform/matrix4_transform.dart';
 
 // /////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -20,28 +21,46 @@ class AlignPositioned extends SingleChildRenderObjectWidget {
   //
   final Alignment alignment;
 
-  // Position:
-  final double dx, dy;
-  final double moveByChildWidth, moveByChildHeight;
-  final double moveByContainerWidth, moveByContainerHeight;
+  /// Position.
+  final double dx,
+      dy,
+      moveByChildWidth,
+      moveByChildHeight,
+      moveByContainerWidth,
+      moveByContainerHeight;
 
-  // You may define preferred child sizes, in absolute terms, or relative to the container size.
-  // It's an error to define preferred sizes in both absolute and relative terms at the same time.
-  final double childWidth, childHeight;
-  final double childWidthRatio, childHeightRatio;
+  /// You may define preferred child sizes, in absolute terms, or relative to the container size.
+  /// If you define both, they will be added.
+  final double childWidth, childHeight, childWidthRatio, childHeightRatio;
 
-  // You can also define min and max values, both in absolute and relative terms.
-  // If you define min sizes in both relative and absolute terms, both are applied.
-  // If you define max sizes in both relative and absolute terms, both are applied.
-  //
-  // sIf min sizes are defined The ratios, if defined, have priority over absolute sizes.
-  // Size (min/max, if defined, have priority over width/height):
-  final double minChildWidth, minChildHeight;
-  final double maxChildWidth, maxChildHeight;
-  final double minChildWidthRatio, minChildHeightRatio;
-  final double maxChildWidthRatio, maxChildHeightRatio;
+  /// You can also define min and max values, both in absolute and relative terms.
+  /// If you define min sizes in both relative and absolute terms, both are applied.
+  /// If you define max sizes in both relative and absolute terms, both are applied.
+  ///
+  /// The ratios, if defined, have priority over absolute sizes.
+  /// Size (min/max, if defined, have priority over width/height):
+  final double minChildWidth,
+      minChildHeight,
+      maxChildWidth,
+      maxChildHeight,
+      minChildWidthRatio,
+      minChildHeightRatio,
+      maxChildWidthRatio,
+      maxChildHeightRatio;
 
-  // If min/max sizes are incompatible, you may define which wins.
+  /// The rotation, in degrees (1 turn is 360 degrees).
+  /// The position of the axis of the rotation (the "origin") depends on the
+  /// `alignment` parameter and the parent. So, for example, `Alignment.center`
+  /// means the axis of rotation is at the center of the parent.
+  final double rotateDegrees;
+
+  /// Some transformation to apply to the child.
+  /// This uses Matrix4Transform instead of Matrix4, since it's easier to use.
+  /// However, you can still use Matrix4 directly with the constructor
+  /// `Matrix4Transform.from(matrix4)`.
+  final Matrix4Transform matrix4Transform;
+
+  /// If min/max sizes are incompatible, you may define which wins.
   final Wins wins;
 
   final Touch touch;
@@ -68,11 +87,11 @@ class AlignPositioned extends SingleChildRenderObjectWidget {
     this.minChildHeightRatio,
     this.maxChildWidthRatio,
     this.maxChildHeightRatio,
+    this.rotateDegrees,
+    this.matrix4Transform,
     this.wins = Wins.min,
     this.touch = Touch.inside,
   })  : assert(alignment != null),
-        assert(childWidth == null || childWidthRatio == null),
-        assert(childHeight == null || childHeightRatio == null),
         super(key: key, child: child);
 
   /// Use this if you put an [AlignPositioned] inside of a [Stack].
@@ -121,6 +140,8 @@ class AlignPositioned extends SingleChildRenderObjectWidget {
     double minChildHeightRatio,
     double maxChildWidthRatio,
     double maxChildHeightRatio,
+    double rotateDegrees,
+    Matrix4Transform matrix4Transform,
     Wins wins = Wins.min,
     Touch touch = Touch.inside,
   }) =>
@@ -150,6 +171,8 @@ class AlignPositioned extends SingleChildRenderObjectWidget {
             minChildHeightRatio: minChildHeightRatio,
             maxChildWidthRatio: maxChildWidthRatio,
             maxChildHeightRatio: maxChildHeightRatio,
+            rotateDegrees: rotateDegrees,
+            matrix4Transform: matrix4Transform,
             wins: wins,
             touch: touch,
           ));
@@ -177,6 +200,8 @@ class AlignPositioned extends SingleChildRenderObjectWidget {
       minChildHeightRatio: minChildHeightRatio,
       maxChildWidthRatio: maxChildWidthRatio,
       maxChildHeightRatio: maxChildHeightRatio,
+      rotateDegrees: rotateDegrees,
+      matrix4Transform: matrix4Transform,
       wins: wins,
       textDirection: Directionality.of(context),
     );
@@ -204,6 +229,8 @@ class AlignPositioned extends SingleChildRenderObjectWidget {
       ..minChildHeightRatio = minChildHeightRatio
       ..maxChildWidthRatio = maxChildWidthRatio
       ..maxChildHeightRatio = maxChildHeightRatio
+      ..rotateDegrees = rotateDegrees
+      ..matrix4Transform = matrix4Transform
       ..wins = wins
       ..touch = touch;
   }
@@ -233,6 +260,8 @@ class _RenderAlignPositionedBox extends RenderShiftedBox {
     @required double minChildHeightRatio,
     @required double maxChildWidthRatio,
     @required double maxChildHeightRatio,
+    @required double rotateDegrees,
+    @required Matrix4Transform matrix4Transform,
     @required Wins wins,
     @required Touch touch,
     Alignment alignment = Alignment.center,
@@ -259,6 +288,8 @@ class _RenderAlignPositionedBox extends RenderShiftedBox {
         _minChildHeightRatio = minChildHeightRatio,
         _maxChildWidthRatio = maxChildWidthRatio,
         _maxChildHeightRatio = maxChildHeightRatio,
+        _rotateDegrees = rotateDegrees,
+        _matrix4Transform = matrix4Transform,
         _wins = wins,
         _touch = touch,
         super(child);
@@ -275,6 +306,8 @@ class _RenderAlignPositionedBox extends RenderShiftedBox {
   double _minChildHeightRatio;
   double _maxChildWidthRatio;
   double _maxChildHeightRatio;
+  double _rotateDegrees;
+  Matrix4Transform _matrix4Transform;
   Wins _wins;
 
   double get childWidth => _childWidth;
@@ -300,6 +333,10 @@ class _RenderAlignPositionedBox extends RenderShiftedBox {
   double get maxChildWidthRatio => _maxChildWidthRatio;
 
   double get maxChildHeightRatio => _maxChildHeightRatio;
+
+  double get rotateDegrees => _rotateDegrees;
+
+  Matrix4Transform get matrix4Transform => _matrix4Transform;
 
   Wins get wins => _wins;
 
@@ -372,6 +409,18 @@ class _RenderAlignPositionedBox extends RenderShiftedBox {
   set maxChildHeightRatio(double value) {
     if (_maxChildHeightRatio == value) return;
     _maxChildHeightRatio = value;
+    markNeedsLayout();
+  }
+
+  set rotateDegrees(double value) {
+    if (_rotateDegrees == value) return;
+    _rotateDegrees = value;
+    markNeedsLayout();
+  }
+
+  set matrix4Transform(Matrix4Transform value) {
+    if (_matrix4Transform == value) return;
+    _matrix4Transform = value;
     markNeedsLayout();
   }
 
@@ -540,13 +589,19 @@ class _RenderAlignPositionedBox extends RenderShiftedBox {
     double maxRatio,
     @required Wins wins,
   }) {
-    assert(size == null || sizeRatio == null);
     assert(wins != null);
     // ---
 
     double min, max;
 
-    if (sizeRatio != null) size = sizeRatio * available;
+    // If size is not defined, calculate the size form the sizeRatio.
+    // If both size and sizeRation are defined, calculate the sizeRatio and then sum the size.
+    if (sizeRatio != null) {
+      if (size != null)
+        size = sizeRatio * available + size;
+      else
+        size = sizeRatio * available;
+    }
 
     min = maxN(minAbsolute, times(minRatio, available));
     max = minN(maxAbsolute, times(maxRatio, available));
@@ -681,6 +736,82 @@ class _RenderAlignPositionedBox extends RenderShiftedBox {
   }
 
   Offset _toOffset(Size size) => Offset(size.width, size.height);
+
+  @override
+  bool hitTestChildren(BoxHitTestResult result, {Offset position}) {
+    assert(!transformHitTests || _effectiveTransform != null);
+    return result.addWithPaintTransform(
+      transform: transformHitTests ? _effectiveTransform : null,
+      position: position,
+      hitTest: (BoxHitTestResult result, Offset position) {
+        return super.hitTestChildren(result, position: position);
+      },
+    );
+  }
+
+  @override
+  void paint(PaintingContext context, Offset offset) {
+    if (child != null) {
+      final Matrix4 transform = _effectiveTransform;
+      final Offset childOffset = MatrixUtils.getAsTranslation(transform);
+      if (childOffset == null)
+        context.pushTransform(needsCompositing, offset, transform, super.paint);
+      else
+        super.paint(context, offset + childOffset);
+    }
+  }
+
+  /// When set to true, hit tests are performed based on the position of the
+  /// child as it is painted. When set to false, hit tests are performed
+  /// ignoring the transformation.
+  ///
+  /// applyPaintTransform(), and therefore localToGlobal() and globalToLocal(),
+  /// always honor the transformation, regardless of the value of this property.
+  bool transformHitTests = true;
+
+  Matrix4 get _effectiveTransform {
+    final Alignment resolvedAlignment = alignment;
+    if (_origin == null && resolvedAlignment == null) return transform;
+    final Matrix4 result = Matrix4.identity();
+    if (_origin != null) result.translate(_origin.dx, _origin.dy);
+    Offset translation;
+    if (resolvedAlignment != null) {
+      translation = resolvedAlignment.alongSize(size);
+      result.translate(translation.dx, translation.dy);
+    }
+    result.multiply(transform);
+    if (resolvedAlignment != null) result.translate(-translation.dx, -translation.dy);
+    if (_origin != null) result.translate(-_origin.dx, -_origin.dy);
+    return result;
+  }
+
+  /// The origin of the coordinate system (relative to the upper left corner of
+  /// this render object) in which to apply the matrix.
+  ///
+  /// Setting an origin is equivalent to conjugating the transform matrix by a
+  /// translation. This property is provided just for convenience.
+  Offset get origin => _origin;
+  Offset _origin;
+
+  set origin(Offset value) {
+    if (_origin == value) return;
+    _origin = value;
+    markNeedsPaint();
+    markNeedsSemanticsUpdate();
+  }
+
+  Matrix4 get transform {
+    Matrix4 matrix4;
+
+    if (_rotateDegrees == null || _rotateDegrees == 0)
+      matrix4 = Matrix4.identity();
+    else
+      matrix4 = Matrix4Transform().rotateDegrees(_rotateDegrees).matrix4;
+
+    if (matrix4Transform != null) matrix4 = matrix4.multiplied(matrix4Transform.matrix4);
+
+    return matrix4;
+  }
 }
 
 // /////////////////////////////////////////////////////////////////////////////////////////////////
