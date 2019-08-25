@@ -24,3 +24,7 @@
 * Rotate.
 * Transform.
  
+## [1.1.8] - 2019/08/25
+
+* AnimatedAlignPositioned.
+ 
