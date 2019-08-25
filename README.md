@@ -2,7 +2,8 @@
 
 **Why is this widget an indispensable tool?** 
 
-When your desired layout feels too complex for Columns and Rows, `AlignPositioned` widget is a real life saver.
+When your desired layout feels too complex for Columns and Rows, `AlignPositioned` and `AnimatedAlignPositioned` 
+widgets are a real life saver.
 Flutter is very composable, which is good, but sometimes it's unnecessarily complex to translate some layout 
 requirement into a composition of simpler widgets. 
 
@@ -18,8 +19,8 @@ and then rotate 15 degrees.*
 Do you even know how to start doing this by composing basic Flutter widgets?
 Maybe, but with `AlignPositioned` it's much easier, and it takes a single widget.
 
-The `AlignPositioned` widget is specially helpful for **animations**, 
-since you can just calculate the final position and size you want for each frame. 
+Both `AlignPositioned` and `AnimatedAlignPositioned` widgets are specially helpful for **animations**, 
+since you can just calculate the final position, size and rotation you want for each frame. 
 Without it you may find yourself having to animate a composition of widgets.
 
 ## How it works 
@@ -30,7 +31,8 @@ then import it:
 
     import 'package:align_positioned/align_positioned.dart';
 
-Pass the `AlignPositioned` a `child`, and then one or more of the following parameters:
+Pass the `AlignPositioned` or the `AnimatedAlignPositioned` a `child`, 
+and then one or more of the following parameters:
  
     AlignPositioned(
        child: child,           
@@ -180,10 +182,13 @@ Optionally, you can also define rotation and transformation:
   means the axis of rotation is at the center of the parent.
   
 - `matrix4Transform` lets you apply any transformation to the child.
-   This uses Matrix4Transform instead of Matrix4, since it's easier to use.
+   This uses <a href="https://pub.dev/packages/matrix4_transform">Matrix4Transform</a> instead of Matrix4, 
+   since it's easier to use.
    However, you can still use Matrix4 directly with the constructor `Matrix4Transform.from(matrix4)`.
 
 ![alt text](./example/alignPos4.png)
+
+![alt text](./example/alignpositioned_and_matrix4transform.webm)
 
 ## Using AlignPositioned inside of a Stack
 
@@ -227,13 +232,13 @@ Stack(
 * <a href="https://pub.dev/packages/async_redux">async_redux</a>
 * <a href="https://pub.dev/packages/align_positioned">align_positioned</a>
 * <a href="https://pub.dev/packages/network_to_file_image">network_to_file_image</a>
-* <a href="https://pub.dev/packages/align_positioned">align_positioned</a> 
+* <a href="https://pub.dev/packages/matrix4_transform">matrix4_transform</a> 
 * <a href="https://pub.dev/packages/back_button_interceptor">back_button_interceptor</a>
 * <a href="https://pub.dev/packages/indexed_list_view">indexed_list_view</a> 
 * <a href="https://pub.dev/packages/animated_size_and_fade">animated_size_and_fade</a>
 
 ---<br>_https://github.com/marcglasberg_<br>
-_https://twitter.com/marcglasberg_<br>
+_https://twitter.com/glasbergmarcelo_<br>
 _https://stackoverflow.com/users/3411681/marcg_<br>
 _https://medium.com/@marcglasberg_<br>
 
