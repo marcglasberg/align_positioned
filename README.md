@@ -1,41 +1,54 @@
 # align_positioned
 
-**Why is this widget an indispensable tool?** 
+Widgets in this package:
 
-When your desired layout feels too complex for Columns and Rows, `AlignPositioned` and `AnimatedAlignPositioned` 
-widgets are a real life saver.
-Flutter is very composable, which is good, but sometimes it's unnecessarily complex to translate some layout 
-requirement into a composition of simpler widgets. 
+* `AlignPositioned`
+* `AnimatedAlignPositioned`
+* `AnimChain`
 
-The `AlignPositioned` aligns, positions, sizes, rotates and transforms its child 
+**Why are these widgets an indispensable tool?**
+
+When your desired layout feels too complex for Columns and Rows,
+`AlignPositioned` is a real life saver.
+Flutter is very composable, which is good,
+but sometimes it's unnecessarily complex to translate some layout
+requirement into a composition of simpler widgets.
+
+The `AlignPositioned` aligns, positions, sizes, rotates and transforms its child
 in relation to both the container and the child itself.
-In other words, it lets you easily and **declaratively** 
-define where and how a widget should appear in relation to another. 
+In other words, it lets you **easily and directly** define
+where and how a widget should appear in relation to another.
 
 For example, *you can tell it to position the top-left of its child at 15 pixels
-to the left of the top-left corner of the container, 
-plus move it two thirds of the child's height to the bottom plus 10 pixels, 
+to the left of the top-left corner of the container,
+plus move it two thirds of the child's height to the bottom plus 10 pixels,
 and then rotate 15 degrees.*
 Do you even know how to start doing this by composing basic Flutter widgets?
 Maybe, but with `AlignPositioned` it's much easier, and it takes a single widget.
 
-Both `AlignPositioned` and `AnimatedAlignPositioned` widgets are specially helpful for **animations**, 
-since you can just calculate the final position, size and rotation you want for each frame. 
+Besides layout, `AlignPositioned` is specially helpful for **explicit animations**
+(those that use a `controller`),
+since you can just calculate the final position, size and rotation you want for each frame.
 Without it you may find yourself having to animate a composition of widgets.
 
-## How it works 
+Meanwhile, `AnimatedAlignPositioned` and `AnimChain` widgets
+are helpful for **implicit animations**, which are very easy to create.
+If you change their parameters they animate
+automatically, interpolating between the old and new parameter values.
 
-Add align_positioned [as a dependency](https://pub.dartlang.org/packages/align_positioned#-installing-tab-) 
+## How it works
+
+Add align_positioned [as a dependency](https://pub.dartlang.org/packages/align_positioned#-installing-tab-)
 in your `pubspec.yaml` file,
 then import it:
 
     import 'package:align_positioned/align_positioned.dart';
 
-Pass the `AlignPositioned` or the `AnimatedAlignPositioned` a `child`, 
+Pass a `child` to the `AlignPositioned` or the `AnimatedAlignPositioned`,
 and then one or more of the following parameters:
- 
+
     AlignPositioned(
-       child: child,           
+       child: child,
        alignment: ...,
        dx: ...,
        dy: ...,
@@ -58,73 +71,76 @@ and then one or more of the following parameters:
        rotateDegrees: ...,
        matrix4Transform: ...,
        wins: ...,
-       touch: ...,       
-       ); 
-   
+       touch: ...,
+       );
+
 Let's study each parameter in detail:
-        
+
+
 ## Align and Position parameters
 
-The `alignment` parameter works as expected. For example, 
-`Alignment.bottomRight` represents the bottom right of the container, 
-and `Alignment(0.0, 0.0)` represents the center of the container. 
-The distance from -1.0 to +1.0 is the distance from one side of the rectangle 
-to the other side of the rectangle. 
+The `alignment` parameter works as expected. For example,
+`Alignment.bottomRight` represents the bottom right of the container,
+and `Alignment(0.0, 0.0)` represents the center of the container.
+The distance from -1.0 to +1.0 is the distance from one side of the rectangle
+to the other side of the rectangle.
 
-If `touch` is `Touch.inside`, then `alignment` works just like the alignment 
-for the `Align` widget, aligning the child inside of the container. 
+If `touch` is `Touch.inside`, then `alignment` works just like the alignment
+for the `Align` widget, aligning the child inside of the container.
 
-However, if `touch` is `Touch.outside`, then the alignment happens outside of 
-the container. 
+However, if `touch` is `Touch.outside`, then the alignment happens outside of
+the container.
 
 As another example, if `touch` is `Touch.inside`, then `Alignment(1.0, 0.0)` makes the child's
-right side touch the right side of the container (it touches the container from the **inside**). 
+right side touch the right side of the container (it touches the container from the **inside**).
 
-But if `touch` is `Touch.outside`, then `Alignment(1.0, 0.0)` makes the child's 
+But if `touch` is `Touch.outside`, then `Alignment(1.0, 0.0)` makes the child's
 left side touch the right side of the container (it touches the container from the **outside**).
 
-Parameters `dx` and `dy` can be positive or negative, and move the child horizontally and 
+Parameters `dx` and `dy` can be positive or negative, and move the child horizontally and
 vertically, in pixels.
 
-Parameters `moveByChildWidth` and `moveByChildHeight` can be positive or negative, and move the child 
-horizontally and vertically, but the unit here is not pixels, but child widths and heights. 
+Parameters `moveByChildWidth` and `moveByChildHeight` can be positive or negative, and move the child
+horizontally and vertically, but the unit here is not pixels, but child widths and heights.
 
-Parameters `moveByContainerWidth` and `moveByContainerHeight` can be positive or negative, and move the child 
+Parameters `moveByContainerWidth` and `moveByContainerHeight` can be positive or negative, and move the child
 horizontally and vertically, but the unit here is not pixels, but container widths and heights.
+
 
 ## Align and Position Examples
 
-The below image shows the center of the child positioned 15 pixels to the right 
-of the top-left corner of the container: 
+The below image shows the center of the child positioned 15 pixels to the right
+of the top-left corner of the container:
 
 ![alt text](./example/lib/alignPos1.png)
-  
+
     AlignPositioned(
-       child: child,        
+       child: child,
        alignment: Alignment.topLeft,
        touch: Touch.inside,
-       dx: 15.0, // Move 4 pixels to the right. 
-       moveByChildWidth: -0.5, // Move half child width to the left.  
+       dx: 15.0, // Move 4 pixels to the right.
+       moveByChildWidth: -0.5, // Move half child width to the left.
        moveByChildHeight: -0.5); // Move half child height to the top.
-       
-Then, to move the child one container width to the right, and one container height to the bottom: 
+
+Then, to move the child one container width to the right, and one container height to the bottom:
 
 ![alt text](./example/lib/alignPos2.png)
-  
+
     AlignPositioned(
-       child: child,        
+       child: child,
        alignment: Alignment.topLeft,
        touch: Touch.inside,
-       dx: 15.0, // Move 4 pixels to the right. 
-       moveByChildWidth: -0.5, // Move half child width to the left.  
+       dx: 15.0, // Move 4 pixels to the right.
+       moveByChildWidth: -0.5, // Move half child width to the left.
        moveByChildHeight: -0.5, // Move half child height to the top.
        moveByContainerWidth: 1.0, // Move one container width to the right.
-       moveByContainerHeight: 1.0); // Move one container height to the bottom.               
+       moveByContainerHeight: 1.0); // Move one container height to the bottom.
 
 Please, check the [example tab](https://pub.dartlang.org/packages/align_positioned#-example-tab-)
 for the effects seen below:
 
 ![alt text](./example/lib/alignPos3.png)
+
 
 ## Size Parameters
 
@@ -134,7 +150,7 @@ Optionally, you can also define the child size:
 
 - `childHeight` is the child height, in pixels.
 
-- `minChildWidth` is the minimum width, in pixels. It has precedence over `childWidth`.  
+- `minChildWidth` is the minimum width, in pixels. It has precedence over `childWidth`.
 
 - `minChildHeight` is the minimum height, in pixels. It has precedence over `childHeight`.
 
@@ -144,33 +160,34 @@ Optionally, you can also define the child size:
 
 - `childWidthRatio` is the child width, as a fraction of the container width.
    If between 0.0 and 1.0, the child will be smaller than its container.
-   If more than 1.0, the child will be larger than its container. 
+   If more than 1.0, the child will be larger than its container.
    If you define both `childWidthRatio` and `childWidth` they will be added.
 
 - `childHeightRatio` is the child height, as a fraction of the container height.
    If between 0.0 and 1.0, the child will be smaller than its container.
    If more than 1.0, the child will be larger than its container.
-   If you define both `childHeightRatio` and `childHeight` they will be added.   
+   If you define both `childHeightRatio` and `childHeight` they will be added.
 
-- `minChildWidthRatio` is the minimum child width, as a fraction of the container width. 
-   It has precedence over `childWidth`. If both `minChildWidth` and `minChildWidthRatio` 
-   are defined, both will be applied (the minimum will be the larger one). 
-
-- `minChildHeightRatio`. is the minimum child height, as a fraction of the container height. 
-   It has precedence over `childHeight`. If both `minChildHeight` and `minChildHeightRatio` 
+- `minChildWidthRatio` is the minimum child width, as a fraction of the container width.
+   It has precedence over `childWidth`. If both `minChildWidth` and `minChildWidthRatio`
    are defined, both will be applied (the minimum will be the larger one).
 
-- `maxChildWidthRatio` is the maximum child width, as a fraction of the container width. 
-   It has precedence over `childWidth`. If both `maxChildWidth` and `maxChildWidthRatio` 
-   are defined, both will be applied (the maximum will be the smaller one). 
+- `minChildHeightRatio`. is the minimum child height, as a fraction of the container height.
+   It has precedence over `childHeight`. If both `minChildHeight` and `minChildHeightRatio`
+   are defined, both will be applied (the minimum will be the larger one).
 
-- `maxChildHeightRatio` is the maximum child height, as a fraction of the container height. 
-   It has precedence over `childHeight`. If both `maxChildHeight` and `maxChildHeightRatio` 
+- `maxChildWidthRatio` is the maximum child width, as a fraction of the container width.
+   It has precedence over `childWidth`. If both `maxChildWidth` and `maxChildWidthRatio`
+   are defined, both will be applied (the maximum will be the smaller one).
+
+- `maxChildHeightRatio` is the maximum child height, as a fraction of the container height.
+   It has precedence over `childHeight`. If both `maxChildHeight` and `maxChildHeightRatio`
    are defined, both will be applied (the maximum will be the smaller one).
 
 - `wins` decides what happens if the minimum size is larger then the maximum size.
-   If `wins` is `Wins.min`, the default, the minimum size will be used.  
+   If `wins` is `Wins.min`, the default, the minimum size will be used.
    If `wins` is `Wins.max`, the maximum size will be used.
+
 
 ## Rotate and Transform
 
@@ -180,15 +197,16 @@ Optionally, you can also define rotation and transformation:
   The position of the axis of the rotation (the "origin") depends on the
   `alignment` parameter and the parent. So, for example, `Alignment.center`
   means the axis of rotation is at the center of the parent.
-  
+
 - `matrix4Transform` lets you apply any transformation to the child.
-   This uses <a href="https://pub.dev/packages/matrix4_transform">Matrix4Transform</a> instead of Matrix4, 
+   This uses <a href="https://pub.dev/packages/matrix4_transform">Matrix4Transform</a> instead of Matrix4,
    since it's easier to use.
    However, you can still use Matrix4 directly with the constructor `Matrix4Transform.from(matrix4)`.
 
 ![alt text](./example/lib/alignPos4.png)
 
 ![alt text](./example/lib/animated_align_positioned.gif)
+
 
 ## Using AlignPositioned inside of a Stack
 
@@ -202,39 +220,89 @@ However, by using `AlignPositioned` you can do precisely that:
 position (and size, rotate and transform) children relative to their size or the Stack's own size,
 and consequently in relation to the other widgets inside of the Stack.
 
-If you recall how a `Stack` works, each of its child widgets is either positioned or non-positioned. 
-The stack sizes itself to contain all the non-positioned children, 
+If you recall how a `Stack` works, each of its child widgets is either positioned or non-positioned.
+The stack sizes itself to contain all the non-positioned children,
 which are positioned according to the stacks's `alignment` parameter.
-Next, the positioned children are laid out. 
+Next, the positioned children are laid out.
 
 If you use the AlignPositioned default constructor and put it inside of a Stack it will be a **non-positioned** child.
 
 To create a **positioned** widget, use the `AlignPositioned.expand()` constructor.
-The `AlignPositioned` will then expand and fix itself to the corners of the `Stack`. 
-In other words, the `Stack` will size itself to their other non-positioned widgets, 
+The `AlignPositioned` will then expand and fix itself to the corners of the `Stack`.
+In other words, the `Stack` will size itself to their other non-positioned widgets,
 and then you can use the `AlignPositioned` to layout its child in relation to the `Stack`.
 
 Example:
 ```
 Stack(
-  children: [      
+  children: [
     Container(...),
-    Positioner(child: Container(...)),                                        
+    Positioner(child: Container(...)),
     AlignPositioned(...),
     AlignPositioned.expand(...),
     ...
     ]);
-```                
+```
+
+## Implicit Animation
+
+If you change the `AnimatedAlignPositioned` parameters it will animate automatically:
+
+    return AnimatedAlignPositioned(
+        duration: Duration(seconds: 3)
+        alignment: Alignment.bottomCenter,
+        rotateDegrees: isOk ? 0 : 180,
+        child: AnimatedContainer(
+            color: isOk ? Colors.yellow : Colors.red,
+            duration: Duration(seconds: 2)
+            ),
+        );
+
+## Chained Implicit Animation
+
+Or you can chain widgets together so that even the change of parameters is automatic:
+
+    return AnimChain(repeat: true)
+       // Show the yellow box and wait 5 seconds.
+       .next(
+          wait: Duration(seconds: 5),
+          widget: AnimatedAlignPositioned(
+             alignment: Alignment.bottomCenter,
+             rotateDegrees: 0,
+             child: Container(color: Colors.yellow),
+             ),
+          )
+       // Rotate to the red box in 3 seconds.
+       .next(
+          wait: Duration(seconds: 3),
+          widget: AnimatedAlignPositioned(
+             duration: Duration(seconds: 3),
+             rotateDegrees: 180,
+             child: Container(color: Colors.red),
+             ),
+          )
+       // Finally, translate the blue in the vertical axis.
+       .next(
+          widget: AnimatedAlignPositioned(
+             duration: Duration(seconds: 15),
+             alignment: Alignment.bottomCenter,
+             dy: 150,
+             rotateDegrees: 180,
+             child: Container(color: Colors.blue),
+             ),
+          ),
+        );
+
 
 ***
 
-*The Flutter packages I've authored:* 
+*The Flutter packages I've authored:*
 * <a href="https://pub.dev/packages/async_redux">async_redux</a>
 * <a href="https://pub.dev/packages/align_positioned">align_positioned</a>
 * <a href="https://pub.dev/packages/network_to_file_image">network_to_file_image</a>
-* <a href="https://pub.dev/packages/matrix4_transform">matrix4_transform</a> 
+* <a href="https://pub.dev/packages/matrix4_transform">matrix4_transform</a>
 * <a href="https://pub.dev/packages/back_button_interceptor">back_button_interceptor</a>
-* <a href="https://pub.dev/packages/indexed_list_view">indexed_list_view</a> 
+* <a href="https://pub.dev/packages/indexed_list_view">indexed_list_view</a>
 * <a href="https://pub.dev/packages/animated_size_and_fade">animated_size_and_fade</a>
 
 ---<br>_https://github.com/marcglasberg_<br>
