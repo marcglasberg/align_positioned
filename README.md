@@ -190,6 +190,24 @@ Optionally, you can also define rotation and transformation:
 
 ![alt text](./example/lib/animated_align_positioned.gif)
 
+## One widget relative to another
+
+Use the `AlignPositioned.relative()` factory if you have a main widget, and you want to
+position/size/rotate/translate another widget relative
+to the main one, but the second is **not** a child of the first.
+
+Example, to center the _main_ widget, and then put the
+_relative_ widget below it:
+
+ ```
+ Center(
+    child: AlignPositioned.relative(
+        widgetA(),
+        widgetB(),
+        moveByContainerHeight: 0.5,
+        moveByChildHeight: 0.5));
+ ```
+
 ## Using AlignPositioned inside of a Stack
 
 A `Stack` positions its children relative to the edges of its box.
@@ -207,9 +225,10 @@ The stack sizes itself to contain all the non-positioned children,
 which are positioned according to the stacks's `alignment` parameter.
 Next, the positioned children are laid out. 
 
-If you use the AlignPositioned default constructor and put it inside of a Stack it will be a **non-positioned** child.
+If you use the `AlignPositioned` default constructor and put it inside of a Stack 
+it will be a **non-positioned** child.
 
-To create a **positioned** widget, use the `AlignPositioned.expand()` constructor.
+To create a **positioned** widget, use the `AlignPositioned.expand()` factory.
 The `AlignPositioned` will then expand and fix itself to the corners of the `Stack`. 
 In other words, the `Stack` will size itself to their other non-positioned widgets, 
 and then you can use the `AlignPositioned` to layout its child in relation to the `Stack`.
@@ -237,7 +256,8 @@ Stack(
 * <a href="https://pub.dev/packages/indexed_list_view">indexed_list_view</a> 
 * <a href="https://pub.dev/packages/animated_size_and_fade">animated_size_and_fade</a>
 
----<br>_https://github.com/marcglasberg_<br>
+<br>_Marcelo Glasberg:_<br>
+_https://github.com/marcglasberg_<br>
 _https://twitter.com/glasbergmarcelo_<br>
 _https://stackoverflow.com/users/3411681/marcg_<br>
 _https://medium.com/@marcglasberg_<br>

@@ -179,6 +179,82 @@ class AlignPositioned extends SingleChildRenderObjectWidget {
             touch: touch,
           ));
 
+  /// Use this if you have a main widget, and you want to
+  /// position/size/rotate/translate another widget relative
+  /// to the main one, but the second is NOT a child of the first.
+  ///
+  /// Example, to center the main widget, and then put the
+  /// relative widget below it:
+  ///
+  /// ```
+  /// Center(
+  ///    child: AlignPositioned.relative(
+  ///        widgetA(),
+  ///        widgetB(),
+  ///        moveByContainerHeight: 0.5,
+  ///        moveByChildHeight: 0.5));
+  /// ```
+  ///
+  static Widget relative(
+    Widget main,
+    Widget relative, {
+    Key key,
+    Widget child,
+    Alignment alignment = Alignment.center,
+    double dx = 0.0,
+    double dy = 0.0,
+    double moveByChildWidth = 0.0,
+    double moveByChildHeight = 0.0,
+    double moveByContainerWidth = 0.0,
+    double moveByContainerHeight = 0.0,
+    double childWidth,
+    double childHeight,
+    double minChildWidth,
+    double minChildHeight,
+    double maxChildWidth,
+    double maxChildHeight,
+    double childWidthRatio,
+    double childHeightRatio,
+    double minChildWidthRatio,
+    double minChildHeightRatio,
+    double maxChildWidthRatio,
+    double maxChildHeightRatio,
+    double rotateDegrees,
+    Matrix4Transform matrix4Transform,
+    Wins wins = Wins.min,
+    Touch touch = Touch.inside,
+  }) {
+    return Stack(children: [
+      main,
+      AlignPositioned.expand(
+        child: relative,
+        alignment: alignment,
+        dx: dx,
+        dy: dy,
+        moveByChildWidth: moveByChildWidth,
+        moveByChildHeight: moveByChildHeight,
+        moveByContainerWidth: moveByContainerWidth,
+        moveByContainerHeight: moveByContainerHeight,
+        childWidth: childWidth,
+        childHeight: childHeight,
+        minChildWidth: minChildWidth,
+        minChildHeight: minChildHeight,
+        maxChildWidth: maxChildWidth,
+        maxChildHeight: maxChildHeight,
+        childWidthRatio: childWidthRatio,
+        childHeightRatio: childHeightRatio,
+        minChildWidthRatio: minChildWidthRatio,
+        minChildHeightRatio: minChildHeightRatio,
+        maxChildWidthRatio: maxChildWidthRatio,
+        maxChildHeightRatio: maxChildHeightRatio,
+        rotateDegrees: rotateDegrees,
+        matrix4Transform: matrix4Transform,
+        wins: wins,
+        touch: touch,
+      ),
+    ]);
+  }
+
   @override
   _RenderAlignPositionedBox createRenderObject(BuildContext context) {
     return _RenderAlignPositionedBox(

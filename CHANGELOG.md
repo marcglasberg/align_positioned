@@ -27,4 +27,8 @@
 ## [1.1.8] - 2019/08/25
 
 * AnimatedAlignPositioned.
+
+## [1.2.0] - 2019/08/25
+
+* AlignPositioned.relative().
  
