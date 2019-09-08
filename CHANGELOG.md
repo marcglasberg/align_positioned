@@ -35,3 +35,7 @@
 ## [1.2.0] - 2019/08/29
 
 * AlignPositioned.relative().
+
+## [1.2.2] - 2019/09/08
+
+* Better docs.
