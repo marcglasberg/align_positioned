@@ -65,7 +65,6 @@ class AnimatedAlignPositioned extends ImplicitlyAnimatedWidget {
   const AnimatedAlignPositioned({
     Key key,
     Duration duration = const Duration(milliseconds: 300),
-    Duration reverseDuration = const Duration(milliseconds: 300),
     Curve curve = Curves.easeInOut,
     this.child,
     this.alignment = Alignment.center,
@@ -97,7 +96,6 @@ class AnimatedAlignPositioned extends ImplicitlyAnimatedWidget {
         super(
           key: key,
           duration: duration,
-          reverseDuration: reverseDuration,
           curve: curve,
         );
 

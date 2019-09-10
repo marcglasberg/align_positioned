@@ -1,3 +1,5 @@
+[![pub package](https://img.shields.io/pub/v/align_positioned.svg)](https://pub.dartlang.org/packages/align_positioned)
+
 # align_positioned
 
 Widgets in this package:

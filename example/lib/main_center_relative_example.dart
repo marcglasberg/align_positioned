@@ -34,5 +34,10 @@ class Demo extends StatelessWidget {
       );
 
   Container widgetB() => Container(
-      color: Colors.blue, child: Text("Excepteur sint occaecat.", style: TextStyle(fontSize: 16)));
+      color: Colors.blue,
+      child: Text(
+          "Excepteur sint occaecat.\n"
+          "Duis aute irure dolor in reprehenderit.",
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 16)));
 }

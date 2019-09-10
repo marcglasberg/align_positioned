@@ -35,3 +35,7 @@
 ## [1.2.0] - 2019/08/29
 
 * AlignPositioned.relative().
+
+## [1.2.1] - 2019/09/10
+
+* Removed reverseDuration.
