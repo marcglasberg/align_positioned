@@ -318,6 +318,8 @@ Or you can chain widgets together so that even the change of parameters is autom
 
 *The Flutter packages I've authored:*
 * <a href="https://pub.dev/packages/async_redux">async_redux</a>
+* <a href="https://pub.dev/packages/provider_for_redux">provider_for_redux</a>
+* <a href="https://pub.dev/packages/i18n_extension">i18n_extension</a>
 * <a href="https://pub.dev/packages/align_positioned">align_positioned</a>
 * <a href="https://pub.dev/packages/network_to_file_image">network_to_file_image</a>
 * <a href="https://pub.dev/packages/matrix4_transform">matrix4_transform</a>
