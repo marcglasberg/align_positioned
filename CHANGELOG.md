@@ -1,22 +1,22 @@
-## [1.0.5] - 2019/02/22
+## [1.2.5] - 2019/09/10
 
-* Code and examples.
+* Docs improvement.
 
-## [1.0.6] - 2019/02/23
+## [1.2.3] - 2019/09/10
 
-* Added moveByContainerWidth and moveByContainerHeight.
+* Removed reverseDuration.
 
-## [1.0.7] - 2019/02/23
+## [1.2.0] - 2019/08/29
 
-* Added size parameters.
+* AlignPositioned.relative().
 
-## [1.0.8] - 2019/08/07
+## [1.1.9] - 2019/08/26
 
-* Better docs.
+* AnimChain.
 
-## [1.1.0] - 2019/08/17
+## [1.1.8] - 2019/08/25
 
-* AlignPositioned inside of a Stack.
+* AnimatedAlignPositioned.
 
 ## [1.1.5] - 2019/08/23
 
@@ -24,18 +24,25 @@
 * Rotate.
 * Transform.
 
-## [1.1.8] - 2019/08/25
+## [1.1.0] - 2019/08/17
 
-* AnimatedAlignPositioned.
+* AlignPositioned inside of a Stack.
 
-## [1.1.9] - 2019/08/26
+## [1.0.8] - 2019/08/07
 
-* AnimChain.
+* Better docs.
 
-## [1.2.0] - 2019/08/29
+## [1.0.7] - 2019/02/23
 
-* AlignPositioned.relative().
+* Added size parameters.
 
-## [1.2.3] - 2019/09/10
+## [1.0.6] - 2019/02/23
 
-* Removed reverseDuration.
+* Added moveByContainerWidth and moveByContainerHeight.
+
+## [1.0.5] - 2019/02/22
+
+* Code and examples.
+
+
+

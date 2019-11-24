@@ -1,7 +1,7 @@
 name: align_positioned
 description: When your desired layout or animation is too complex for Columns and Rows, this widget is a life saver. It lets you declaratively position/size its child in complex ways.
 
-version: 1.2.4
+version: 1.2.5
 author: Marcelo Glasberg <marcglasberg@gmail.com>
 homepage: https://github.com/marcglasberg/align_positioned
 
