@@ -806,7 +806,7 @@ class _RenderAlignPositionedBox extends RenderShiftedBox {
       child.size.height * moveByChildHeight,
     );
 
-    // 3) Adds moveByContainerWidth and moveByContainerHeight.
+    // 4) Adds moveByContainerWidth and moveByContainerHeight.
     childParentData.offset += Offset(
       size.width * moveByContainerWidth,
       size.height * moveByContainerHeight,
