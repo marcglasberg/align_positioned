@@ -114,7 +114,7 @@ horizontally and vertically, but the unit here is not pixels, but container widt
 The below image shows the center of the child positioned 15 pixels to the right
 of the top-left corner of the container:
 
-![alt text](./example/lib/alignPos1.png)
+![](./example/lib/alignPos1.png)
 
     AlignPositioned(
        child: child,
@@ -126,7 +126,7 @@ of the top-left corner of the container:
 
 Then, to move the child one container width to the right, and one container height to the bottom:
 
-![alt text](./example/lib/alignPos2.png)
+![](./example/lib/alignPos2.png)
 
     AlignPositioned(
        child: child,
@@ -141,7 +141,7 @@ Then, to move the child one container width to the right, and one container heig
 Please, check the [example tab](https://pub.dartlang.org/packages/align_positioned#-example-tab-)
 for the effects seen below:
 
-![alt text](./example/lib/alignPos3.png)
+![](./example/lib/alignPos3.png)
 
 
 ## Size Parameters
@@ -205,9 +205,9 @@ Optionally, you can also define rotation and transformation:
    since it's easier to use.
    However, you can still use Matrix4 directly with the constructor `Matrix4Transform.from(matrix4)`.
 
-![alt text](./example/lib/alignPos4.png)
+![](./example/lib/alignPos4.png)
 
-![alt text](./example/lib/animated_align_positioned.gif)
+![](./example/lib/animated_align_positioned.gif)
 
 ## One widget relative to another
 
