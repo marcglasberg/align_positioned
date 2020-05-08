@@ -6,7 +6,7 @@ author: Marcelo Glasberg <marcglasberg@gmail.com>
 homepage: https://github.com/marcglasberg/align_positioned
 
 environment:
-  sdk: ">=2.0.0 <3.0.0"
+  sdk: ">=2.8.0 <3.0.0"
 
 dependencies:
   matrix4_transform: ^1.1.3
