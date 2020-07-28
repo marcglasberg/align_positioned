@@ -100,19 +100,35 @@ class AnimatedAlignPositioned extends ImplicitlyAnimatedWidget {
         );
 
   @override
-  _AnimatedAlignPositionedState createState() => _AnimatedAlignPositionedState();
+  _AnimatedAlignPositionedState createState() => //
+      _AnimatedAlignPositionedState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<double>('dx', dx, showName: false, defaultValue: null));
-    properties.add(DiagnosticsProperty<double>('dy', dy, showName: false, defaultValue: null));
+    properties.add(
+      DiagnosticsProperty<double>(
+        'dx',
+        dx,
+        showName: false,
+        defaultValue: null,
+      ),
+    );
+    properties.add(
+      DiagnosticsProperty<double>(
+        'dy',
+        dy,
+        showName: false,
+        defaultValue: null,
+      ),
+    );
   }
 }
 
 // ////////////////////////////////////////////////////////////////////////////
 
-class _AnimatedAlignPositionedState extends AnimatedWidgetBaseState<AnimatedAlignPositioned> {
+class _AnimatedAlignPositionedState //
+    extends AnimatedWidgetBaseState<AnimatedAlignPositioned> {
   AlignmentGeometryTween _alignment;
   Tween<double> _dx;
   Tween<double> _dy;
@@ -138,46 +154,110 @@ class _AnimatedAlignPositionedState extends AnimatedWidgetBaseState<AnimatedAlig
   @override
   void forEachTween(TweenVisitor<dynamic> visitor) {
     _alignment = visitor(
-        _alignment, widget.alignment, (dynamic value) => AlignmentGeometryTween(begin: value));
-    _dx = visitor(_dx, widget.dx, (dynamic value) => Tween<double>(begin: value));
-    _dy = visitor(_dy, widget.dy, (dynamic value) => Tween<double>(begin: value));
+      _alignment,
+      widget.alignment,
+      (dynamic value) => AlignmentGeometryTween(begin: value),
+    );
+    _dx = visitor(
+      _dx,
+      widget.dx,
+      (dynamic value) => Tween<double>(begin: value),
+    );
+    _dy = visitor(
+      _dy,
+      widget.dy,
+      (dynamic value) => Tween<double>(begin: value),
+    );
     _moveByChildWidth = visitor(
-        _moveByChildWidth, widget.moveByChildWidth, (dynamic value) => Tween<double>(begin: value));
-    _moveByChildHeight = visitor(_moveByChildHeight, widget.moveByChildHeight,
-        (dynamic value) => Tween<double>(begin: value));
-    _moveByContainerWidth = visitor(_moveByContainerWidth, widget.moveByContainerWidth,
-        (dynamic value) => Tween<double>(begin: value));
-    _moveByContainerHeight = visitor(_moveByContainerHeight, widget.moveByContainerHeight,
-        (dynamic value) => Tween<double>(begin: value));
-    _childWidth =
-        visitor(_childWidth, widget.childWidth, (dynamic value) => Tween<double>(begin: value));
-    _childHeight =
-        visitor(_childHeight, widget.childHeight, (dynamic value) => Tween<double>(begin: value));
+      _moveByChildWidth,
+      widget.moveByChildWidth,
+      (dynamic value) => Tween<double>(begin: value),
+    );
+    _moveByChildHeight = visitor(
+      _moveByChildHeight,
+      widget.moveByChildHeight,
+      (dynamic value) => Tween<double>(begin: value),
+    );
+    _moveByContainerWidth = visitor(
+      _moveByContainerWidth,
+      widget.moveByContainerWidth,
+      (dynamic value) => Tween<double>(begin: value),
+    );
+    _moveByContainerHeight = visitor(
+      _moveByContainerHeight,
+      widget.moveByContainerHeight,
+      (dynamic value) => Tween<double>(begin: value),
+    );
+    _childWidth = visitor(
+      _childWidth,
+      widget.childWidth,
+      (dynamic value) => Tween<double>(begin: value),
+    );
+    _childHeight = visitor(
+      _childHeight,
+      widget.childHeight,
+      (dynamic value) => Tween<double>(begin: value),
+    );
     _minChildWidth = visitor(
-        _minChildWidth, widget.minChildWidth, (dynamic value) => Tween<double>(begin: value));
+      _minChildWidth,
+      widget.minChildWidth,
+      (dynamic value) => Tween<double>(begin: value),
+    );
     _minChildHeight = visitor(
-        _minChildHeight, widget.minChildHeight, (dynamic value) => Tween<double>(begin: value));
+      _minChildHeight,
+      widget.minChildHeight,
+      (dynamic value) => Tween<double>(begin: value),
+    );
     _maxChildWidth = visitor(
-        _maxChildWidth, widget.maxChildWidth, (dynamic value) => Tween<double>(begin: value));
+      _maxChildWidth,
+      widget.maxChildWidth,
+      (dynamic value) => Tween<double>(begin: value),
+    );
     _maxChildHeight = visitor(
-        _maxChildHeight, widget.maxChildHeight, (dynamic value) => Tween<double>(begin: value));
+      _maxChildHeight,
+      widget.maxChildHeight,
+      (dynamic value) => Tween<double>(begin: value),
+    );
     _childWidthRatio = visitor(
-        _childWidthRatio, widget.childWidthRatio, (dynamic value) => Tween<double>(begin: value));
+      _childWidthRatio,
+      widget.childWidthRatio,
+      (dynamic value) => Tween<double>(begin: value),
+    );
     _childHeightRatio = visitor(
-        _childHeightRatio, widget.childHeightRatio, (dynamic value) => Tween<double>(begin: value));
-    _minChildWidthRatio = visitor(_minChildWidthRatio, widget.minChildWidthRatio,
-        (dynamic value) => Tween<double>(begin: value));
-    _minChildHeightRatio = visitor(_minChildHeightRatio, widget.minChildHeightRatio,
-        (dynamic value) => Tween<double>(begin: value));
-    _maxChildWidthRatio = visitor(_maxChildWidthRatio, widget.maxChildWidthRatio,
-        (dynamic value) => Tween<double>(begin: value));
-    _maxChildHeightRatio = visitor(_maxChildHeightRatio, widget.maxChildHeightRatio,
-        (dynamic value) => Tween<double>(begin: value));
+      _childHeightRatio,
+      widget.childHeightRatio,
+      (dynamic value) => Tween<double>(begin: value),
+    );
+    _minChildWidthRatio = visitor(
+      _minChildWidthRatio,
+      widget.minChildWidthRatio,
+      (dynamic value) => Tween<double>(begin: value),
+    );
+    _minChildHeightRatio = visitor(
+      _minChildHeightRatio,
+      widget.minChildHeightRatio,
+      (dynamic value) => Tween<double>(begin: value),
+    );
+    _maxChildWidthRatio = visitor(
+      _maxChildWidthRatio,
+      widget.maxChildWidthRatio,
+      (dynamic value) => Tween<double>(begin: value),
+    );
+    _maxChildHeightRatio = visitor(
+      _maxChildHeightRatio,
+      widget.maxChildHeightRatio,
+      (dynamic value) => Tween<double>(begin: value),
+    );
     _rotateDegrees = visitor(
-        _rotateDegrees, widget.rotateDegrees, (dynamic value) => Tween<double>(begin: value));
-
-    _matrix4Transform = visitor(_matrix4Transform, widget.matrix4Transform,
-        (dynamic value) => Matrix4TransformTween(begin: value));
+      _rotateDegrees,
+      widget.rotateDegrees,
+      (dynamic value) => Tween<double>(begin: value),
+    );
+    _matrix4Transform = visitor(
+      _matrix4Transform,
+      widget.matrix4Transform,
+      (dynamic value) => Matrix4TransformTween(begin: value),
+    );
   }
 
   @override
@@ -213,10 +293,18 @@ class _AnimatedAlignPositionedState extends AnimatedWidgetBaseState<AnimatedAlig
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder description) {
     super.debugFillProperties(description);
-    description
-        .add(DiagnosticsProperty<Tween<double>>('dx', _dx, showName: false, defaultValue: null));
-    description
-        .add(DiagnosticsProperty<Tween<double>>('dy', _dy, showName: false, defaultValue: null));
+    description.add(DiagnosticsProperty<Tween<double>>(
+      'dx',
+      _dx,
+      showName: false,
+      defaultValue: null,
+    ));
+    description.add(DiagnosticsProperty<Tween<double>>(
+      'dy',
+      _dy,
+      showName: false,
+      defaultValue: null,
+    ));
   }
 }
 

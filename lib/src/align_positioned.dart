@@ -654,7 +654,11 @@ class _RenderAlignPositionedBox extends RenderShiftedBox {
     var maxHeight = minMaxHeight[1];
 
     return BoxConstraints(
-        minWidth: minWidth, maxWidth: maxWidth, minHeight: minHeight, maxHeight: maxHeight);
+      minWidth: minWidth,
+      maxWidth: maxWidth,
+      minHeight: minHeight,
+      maxHeight: maxHeight,
+    );
   }
 
   List<double> calculateConstraints({
@@ -751,28 +755,55 @@ class _RenderAlignPositionedBox extends RenderShiftedBox {
       throw AssertionError();
   }
 
+  static const infinite = const Size(double.infinity, double.infinity);
+
   @override
   void performLayout() {
-    //
+    _checkConstraints();
+
     if (definesChildSize) {
       if (child != null) {
         child.layout(_getInnerConstraints(constraints), parentUsesSize: true);
-        size = constraints.constrain(const Size(double.infinity, double.infinity));
+        size = constraints.constrain(infinite);
         alignChild();
       } else {
-        size = constraints.constrain(const Size(double.infinity, double.infinity));
+        size = constraints.constrain(infinite);
       }
     }
     //
     else {
       if (child != null) {
         child.layout(constraints.loosen(), parentUsesSize: true);
-        size = constraints.constrain(const Size(double.infinity, double.infinity));
+        size = constraints.constrain(infinite);
         alignChild();
       } else {
-        size = constraints.constrain(const Size(double.infinity, double.infinity));
+        size = constraints.constrain(infinite);
       }
     }
+  }
+
+  void _checkConstraints() {
+    if (constraints.maxWidth == double.infinity)
+      throw FlutterError.fromParts(<DiagnosticsNode>[
+        ErrorSummary(
+          'AlignPositioned was given an infinite width during layout.',
+        ),
+        ErrorDescription(
+            'This probably means it is inside of a widget which lets its width be as large as it wants. '
+            'You can solve this by making its width finite, '
+            'for example, by putting the AlignPositioned inside of a Container with a fixed width.'),
+      ]);
+
+    if (constraints.maxHeight == double.infinity)
+      throw FlutterError.fromParts(<DiagnosticsNode>[
+        ErrorSummary(
+          'AlignPositioned was given an infinite height during layout.',
+        ),
+        ErrorDescription(
+            'This probably means it is inside of a widget which lets its height be as large as it wants. '
+            'You can solve this by making its height finite, '
+            'for example, by putting the AlignPositioned inside of a Container with a fixed height.'),
+      ]);
   }
 
   @protected
@@ -792,7 +823,8 @@ class _RenderAlignPositionedBox extends RenderShiftedBox {
       childParentData.offset = alignment.alongOffset(containerSize - childSize);
     //
     else if (_touch == Touch.outside)
-      childParentData.offset = alignment.alongOffset(containerSize + childSize) - childSize;
+      childParentData.offset = //
+          alignment.alongOffset(containerSize + childSize) - childSize;
     //
     else
       throw AssertionError();
@@ -858,8 +890,10 @@ class _RenderAlignPositionedBox extends RenderShiftedBox {
       result.translate(translation.dx, translation.dy);
     }
     result.multiply(transform);
-    if (resolvedAlignment != null) result.translate(-translation.dx, -translation.dy);
-    if (_origin != null) result.translate(-_origin.dx, -_origin.dy);
+    if (resolvedAlignment != null) //
+      result.translate(-translation.dx, -translation.dy);
+    if (_origin != null) //
+      result.translate(-_origin.dx, -_origin.dy);
     return result;
   }
 
@@ -886,7 +920,8 @@ class _RenderAlignPositionedBox extends RenderShiftedBox {
     else
       matrix4 = Matrix4Transform().rotateDegrees(_rotateDegrees).matrix4;
 
-    if (matrix4Transform != null) matrix4 = matrix4.multiplied(matrix4Transform.matrix4);
+    if (matrix4Transform != null) //
+      matrix4 = matrix4.multiplied(matrix4Transform.matrix4);
 
     return matrix4;
   }
