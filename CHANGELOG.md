@@ -1,3 +1,7 @@
+## [1.2.8] - 2020/09/14
+
+* Docs improvement.
+
 ## [1.2.7] - 2020/07/27
 
 * Better error message when AlignPositioned is given infinite size.
