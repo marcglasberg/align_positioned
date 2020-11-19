@@ -90,14 +90,18 @@ to the other side of the rectangle.
 If `touch` is `Touch.inside`, then `alignment` works just like the alignment
 for the `Align` widget, aligning the child inside of the container.
 
-However, if `touch` is `Touch.outside`, then the alignment happens outside of
-the container.
+However, if `touch` is `Touch.outside`, then the alignment happens outside of the container; 
+and if it's `Touch.middle`, the center of the child will be aligned to the container edge.
 
 As another example, if `touch` is `Touch.inside`, then `Alignment(1.0, 0.0)` makes the child's
 right side touch the right side of the container (it touches the container from the **inside**).
 
 But if `touch` is `Touch.outside`, then `Alignment(1.0, 0.0)` makes the child's
 left side touch the right side of the container (it touches the container from the **outside**).
+
+But if `touch` is `Touch.middle`, then `Alignment(1.0, 0.0)` makes the child's
+center touch the right side of the container (it touches the container from the **middle**).
+
 
 Parameters `dx` and `dy` can be positive or negative, and move the child horizontally and
 vertically, in pixels.
