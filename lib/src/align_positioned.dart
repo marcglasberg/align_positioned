@@ -6,7 +6,7 @@ import 'package:matrix4_transform/matrix4_transform.dart';
 
 // /////////////////////////////////////////////////////////////////////////////////////////////////
 
-enum Touch { inside, outside }
+enum Touch { inside, outside, middle }
 
 enum Wins { min, max }
 
@@ -94,6 +94,7 @@ class AlignPositioned extends SingleChildRenderObjectWidget {
     this.wins = Wins.min,
     this.touch = Touch.inside,
   })  : assert(alignment != null),
+        assert(touch != null),
         super(key: key, child: child);
 
   /// Use this if you put an [AlignPositioned] inside of a [Stack].
@@ -826,8 +827,12 @@ class _RenderAlignPositionedBox extends RenderShiftedBox {
       childParentData.offset = //
           alignment.alongOffset(containerSize + childSize) - childSize;
     //
+    else if (_touch == Touch.middle)
+      childParentData.offset = //
+          alignment.alongOffset(containerSize) - childSize / 2;
+    //
     else
-      throw AssertionError();
+      throw AssertionError(_touch);
 
     // 2) Adds dx and dy.
     childParentData.offset += Offset(dx, dy);

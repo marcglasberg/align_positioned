@@ -18,6 +18,84 @@ class Demo extends StatelessWidget {
               SizedBox(height: 50, width: double.infinity),
               //
               Container(
+                width: 150,
+                height: 150,
+                color: Colors.yellow,
+                child: Stack(
+                  children: [
+                    AlignPositioned(
+                      child: circle(Colors.yellow),
+                      alignment: Alignment(0, 0),
+                      touch: Touch.middle,
+                    ),
+                    AlignPositioned(
+                      child: circle(Colors.yellow),
+                      alignment: Alignment(0.5, 0),
+                      touch: Touch.middle,
+                    ),
+                    AlignPositioned(
+                      child: circle(Colors.yellow),
+                      alignment: Alignment(-0.5, 0),
+                      touch: Touch.middle,
+                    ),
+                    AlignPositioned(
+                      child: circle(Colors.yellow),
+                      alignment: Alignment(0, 0.5),
+                      touch: Touch.middle,
+                    ),
+                    AlignPositioned(
+                      child: circle(Colors.yellow),
+                      alignment: Alignment(0, -0.5),
+                      touch: Touch.middle,
+                    ),
+                    AlignPositioned(
+                      child: circle(Colors.red),
+                      alignment: Alignment(-1, 0),
+                      touch: Touch.middle,
+                    ),
+                    AlignPositioned(
+                      child: circle(Colors.blue),
+                      alignment: Alignment(1, 0),
+                      touch: Touch.middle,
+                    ),
+                    AlignPositioned(
+                      child: circle(Colors.green),
+                      alignment: Alignment(0, -1),
+                      touch: Touch.middle,
+                    ),
+                    AlignPositioned(
+                      child: circle(Colors.purple),
+                      alignment: Alignment(0, 1),
+                      touch: Touch.middle,
+                    ),
+                    AlignPositioned(
+                      child: circle(Colors.black38),
+                      alignment: Alignment(-1, -1),
+                      touch: Touch.middle,
+                    ),
+                    AlignPositioned(
+                      child: circle(Colors.black38),
+                      alignment: Alignment(1, 1),
+                      touch: Touch.middle,
+                    ),
+                    AlignPositioned(
+                      child: circle(Colors.black38),
+                      alignment: Alignment(1, -1),
+                      touch: Touch.middle,
+                    ),
+                    AlignPositioned(
+                      child: circle(Colors.black38),
+                      alignment: Alignment(-1, 1),
+                      touch: Touch.middle,
+                    )
+
+                  ],
+                ),
+              ),
+              //
+              SizedBox(height: 50, width: double.infinity),
+              //
+              Container(
                   width: 150,
                   height: 150,
                   color: Colors.yellow,
