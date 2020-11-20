@@ -140,29 +140,29 @@ class AnimatedAlignPositioned extends ImplicitlyAnimatedWidget {
 class _AnimatedAlignPositionedState //
     extends AnimatedWidgetBaseState<AnimatedAlignPositioned> {
   AlignmentGeometryTween _alignment;
-  Tween<double> _dx;
-  Tween<double> _dy;
-  Tween<double> _moveByChildWidth;
-  Tween<double> _moveByChildHeight;
-  Tween<double> _moveByContainerWidth;
-  Tween<double> _moveByContainerHeight;
-  Tween<double> _moveVerticallyByChildWidth;
-  Tween<double> _moveHorizontallyByChildHeight;
-  Tween<double> _moveVerticallyByContainerWidth;
-  Tween<double> _moveHorizontallyByContainerHeight;
-  Tween<double> _childWidth;
-  Tween<double> _childHeight;
-  Tween<double> _minChildWidth;
-  Tween<double> _minChildHeight;
-  Tween<double> _maxChildWidth;
-  Tween<double> _maxChildHeight;
-  Tween<double> _childWidthRatio;
-  Tween<double> _childHeightRatio;
-  Tween<double> _minChildWidthRatio;
-  Tween<double> _minChildHeightRatio;
-  Tween<double> _maxChildWidthRatio;
-  Tween<double> _maxChildHeightRatio;
-  Tween<double> _rotateDegrees;
+  _TweenThatAcceptsNulls<double> _dx;
+  _TweenThatAcceptsNulls<double> _dy;
+  _TweenThatAcceptsNulls<double> _moveByChildWidth;
+  _TweenThatAcceptsNulls<double> _moveByChildHeight;
+  _TweenThatAcceptsNulls<double> _moveByContainerWidth;
+  _TweenThatAcceptsNulls<double> _moveByContainerHeight;
+  _TweenThatAcceptsNulls<double> _moveVerticallyByChildWidth;
+  _TweenThatAcceptsNulls<double> _moveHorizontallyByChildHeight;
+  _TweenThatAcceptsNulls<double> _moveVerticallyByContainerWidth;
+  _TweenThatAcceptsNulls<double> _moveHorizontallyByContainerHeight;
+  _TweenThatAcceptsNulls<double> _childWidth;
+  _TweenThatAcceptsNulls<double> _childHeight;
+  _TweenThatAcceptsNulls<double> _minChildWidth;
+  _TweenThatAcceptsNulls<double> _minChildHeight;
+  _TweenThatAcceptsNulls<double> _maxChildWidth;
+  _TweenThatAcceptsNulls<double> _maxChildHeight;
+  _TweenThatAcceptsNulls<double> _childWidthRatio;
+  _TweenThatAcceptsNulls<double> _childHeightRatio;
+  _TweenThatAcceptsNulls<double> _minChildWidthRatio;
+  _TweenThatAcceptsNulls<double> _minChildHeightRatio;
+  _TweenThatAcceptsNulls<double> _maxChildWidthRatio;
+  _TweenThatAcceptsNulls<double> _maxChildHeightRatio;
+  _TweenThatAcceptsNulls<double> _rotateDegrees;
   Matrix4TransformTween _matrix4Transform;
 
   @override
@@ -170,127 +170,127 @@ class _AnimatedAlignPositionedState //
     _alignment = visitor(
       _alignment,
       widget.alignment,
-      (dynamic value) => AlignmentGeometryTween(begin: value),
+      (dynamic value) => AlignmentGeometryTween(begin: value ?? Alignment.center),
     );
     _dx = visitor(
       _dx,
       widget.dx,
-      (dynamic value) => Tween<double>(begin: value),
+      (dynamic value) => _TweenThatAcceptsNulls<double>(begin: value ?? 0.0),
     );
     _dy = visitor(
       _dy,
       widget.dy,
-      (dynamic value) => Tween<double>(begin: value),
+      (dynamic value) => _TweenThatAcceptsNulls<double>(begin: value ?? 0.0),
     );
     _moveByChildWidth = visitor(
       _moveByChildWidth,
       widget.moveByChildWidth,
-      (dynamic value) => Tween<double>(begin: value),
+      (dynamic value) => _TweenThatAcceptsNulls<double>(begin: value ?? 0.0),
     );
     _moveByChildHeight = visitor(
       _moveByChildHeight,
       widget.moveByChildHeight,
-      (dynamic value) => Tween<double>(begin: value),
+      (dynamic value) => _TweenThatAcceptsNulls<double>(begin: value ?? 0.0),
     );
     _moveByContainerWidth = visitor(
       _moveByContainerWidth,
       widget.moveByContainerWidth,
-      (dynamic value) => Tween<double>(begin: value),
+      (dynamic value) => _TweenThatAcceptsNulls<double>(begin: value ?? 0.0),
     );
     _moveByContainerHeight = visitor(
       _moveByContainerHeight,
       widget.moveByContainerHeight,
-      (dynamic value) => Tween<double>(begin: value),
+      (dynamic value) => _TweenThatAcceptsNulls<double>(begin: value ?? 0.0),
     );
     _moveVerticallyByChildWidth = visitor(
       _moveVerticallyByChildWidth,
       widget.moveVerticallyByChildWidth,
-      (dynamic value) => Tween<double>(begin: value),
+      (dynamic value) => _TweenThatAcceptsNulls<double>(begin: value ?? 0.0),
     );
     _moveHorizontallyByChildHeight = visitor(
       _moveHorizontallyByChildHeight,
       widget.moveHorizontallyByChildHeight,
-      (dynamic value) => Tween<double>(begin: value),
+      (dynamic value) => _TweenThatAcceptsNulls<double>(begin: value ?? 0.0),
     );
     _moveVerticallyByContainerWidth = visitor(
       _moveVerticallyByContainerWidth,
       widget.moveVerticallyByContainerWidth,
-      (dynamic value) => Tween<double>(begin: value),
+      (dynamic value) => _TweenThatAcceptsNulls<double>(begin: value ?? 0.0),
     );
     _moveHorizontallyByContainerHeight = visitor(
       _moveHorizontallyByContainerHeight,
       widget.moveHorizontallyByContainerHeight,
-      (dynamic value) => Tween<double>(begin: value),
+      (dynamic value) => _TweenThatAcceptsNulls<double>(begin: value ?? 0.0),
     );
     _childWidth = visitor(
       _childWidth,
       widget.childWidth,
-      (dynamic value) => Tween<double>(begin: value),
+      (dynamic value) => _TweenThatAcceptsNulls<double>(begin: value),
     );
     _childHeight = visitor(
       _childHeight,
       widget.childHeight,
-      (dynamic value) => Tween<double>(begin: value),
+      (dynamic value) => _TweenThatAcceptsNulls<double>(begin: value),
     );
     _minChildWidth = visitor(
       _minChildWidth,
       widget.minChildWidth,
-      (dynamic value) => Tween<double>(begin: value),
+      (dynamic value) => _TweenThatAcceptsNulls<double>(begin: value ?? 0.0),
     );
     _minChildHeight = visitor(
       _minChildHeight,
       widget.minChildHeight,
-      (dynamic value) => Tween<double>(begin: value),
+      (dynamic value) => _TweenThatAcceptsNulls<double>(begin: value ?? 0.0),
     );
     _maxChildWidth = visitor(
       _maxChildWidth,
       widget.maxChildWidth,
-      (dynamic value) => Tween<double>(begin: value),
+      (dynamic value) => _TweenThatAcceptsNulls<double>(begin: value ?? double.infinity),
     );
     _maxChildHeight = visitor(
       _maxChildHeight,
       widget.maxChildHeight,
-      (dynamic value) => Tween<double>(begin: value),
+      (dynamic value) => _TweenThatAcceptsNulls<double>(begin: value ?? double.infinity),
     );
     _childWidthRatio = visitor(
       _childWidthRatio,
       widget.childWidthRatio,
-      (dynamic value) => Tween<double>(begin: value),
+      (dynamic value) => _TweenThatAcceptsNulls<double>(begin: value),
     );
     _childHeightRatio = visitor(
       _childHeightRatio,
       widget.childHeightRatio,
-      (dynamic value) => Tween<double>(begin: value),
+      (dynamic value) => _TweenThatAcceptsNulls<double>(begin: value),
     );
     _minChildWidthRatio = visitor(
       _minChildWidthRatio,
       widget.minChildWidthRatio,
-      (dynamic value) => Tween<double>(begin: value),
+      (dynamic value) => _TweenThatAcceptsNulls<double>(begin: value ?? 0.0),
     );
     _minChildHeightRatio = visitor(
       _minChildHeightRatio,
       widget.minChildHeightRatio,
-      (dynamic value) => Tween<double>(begin: value),
+      (dynamic value) => _TweenThatAcceptsNulls<double>(begin: value ?? 0.0),
     );
     _maxChildWidthRatio = visitor(
       _maxChildWidthRatio,
       widget.maxChildWidthRatio,
-      (dynamic value) => Tween<double>(begin: value),
+      (dynamic value) => _TweenThatAcceptsNulls<double>(begin: value ?? double.infinity),
     );
     _maxChildHeightRatio = visitor(
       _maxChildHeightRatio,
       widget.maxChildHeightRatio,
-      (dynamic value) => Tween<double>(begin: value),
+      (dynamic value) => _TweenThatAcceptsNulls<double>(begin: value ?? double.infinity),
     );
     _rotateDegrees = visitor(
       _rotateDegrees,
       widget.rotateDegrees,
-      (dynamic value) => Tween<double>(begin: value),
+      (dynamic value) => _TweenThatAcceptsNulls<double>(begin: value ?? 0.0),
     );
     _matrix4Transform = visitor(
       _matrix4Transform,
       widget.matrix4Transform,
-      (dynamic value) => Matrix4TransformTween(begin: value),
+      (dynamic value) => Matrix4TransformTween(begin: value ?? Matrix4Transform()),
     );
   }
 
@@ -331,18 +331,35 @@ class _AnimatedAlignPositionedState //
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder description) {
     super.debugFillProperties(description);
-    description.add(DiagnosticsProperty<Tween<double>>(
+    description.add(DiagnosticsProperty<_TweenThatAcceptsNulls<double>>(
       'dx',
       _dx,
       showName: false,
       defaultValue: null,
     ));
-    description.add(DiagnosticsProperty<Tween<double>>(
+    description.add(DiagnosticsProperty<_TweenThatAcceptsNulls<double>>(
       'dy',
       _dy,
       showName: false,
       defaultValue: null,
     ));
+  }
+}
+
+// ////////////////////////////////////////////////////////////////////////////
+
+class _TweenThatAcceptsNulls<T extends dynamic> extends Tween<T> {
+  _TweenThatAcceptsNulls({
+    T begin,
+    T end,
+  }) : super(begin: begin, end: end);
+
+  @override
+  @protected
+  T lerp(double t) {
+    if (begin == null) return end;
+    if (end == null) return begin;
+    return begin + (end - begin) * t as T;
   }
 }
 

@@ -1,9 +1,10 @@
-## [1.2.10] - 2020/11/20
+## [1.2.11] - 2020/11/20
 
 * moveVerticallyByChildWidth.
 * moveHorizontallyByChildHeight.
 * moveVerticallyByContainerWidth. 
 * moveHorizontallyByContainerHeight.
+* Better treatment of null values in AnimatedAlignPositioned.
   
 ## [1.2.9] - 2020/11/19
 
