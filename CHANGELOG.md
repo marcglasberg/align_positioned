@@ -1,4 +1,4 @@
-## [1.2.11] - 2020/11/20
+## [1.2.12] - 2020/11/20
 
 * moveVerticallyByChildWidth.
 * moveHorizontallyByChildHeight.
