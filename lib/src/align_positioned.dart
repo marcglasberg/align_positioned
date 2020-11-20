@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:matrix4_transform/matrix4_transform.dart';
@@ -26,6 +25,12 @@ class AlignPositioned extends SingleChildRenderObjectWidget {
       moveByChildHeight,
       moveByContainerWidth,
       moveByContainerHeight;
+
+  /// Position moving orthogonally.
+  final double moveVerticallyByChildWidth,
+      moveHorizontallyByChildHeight,
+      moveVerticallyByContainerWidth,
+      moveHorizontallyByContainerHeight;
 
   /// You may define preferred child sizes, in absolute terms, or relative to the container size.
   /// If you define both, they will be added.
@@ -77,6 +82,10 @@ class AlignPositioned extends SingleChildRenderObjectWidget {
     this.moveByChildHeight = 0.0,
     this.moveByContainerWidth = 0.0,
     this.moveByContainerHeight = 0.0,
+    this.moveVerticallyByChildWidth = 0.0,
+    this.moveHorizontallyByChildHeight = 0.0,
+    this.moveVerticallyByContainerWidth = 0.0,
+    this.moveHorizontallyByContainerHeight = 0.0,
     this.childWidth,
     this.childHeight,
     this.minChildWidth,
@@ -131,6 +140,10 @@ class AlignPositioned extends SingleChildRenderObjectWidget {
     double moveByChildHeight = 0.0,
     double moveByContainerWidth = 0.0,
     double moveByContainerHeight = 0.0,
+    double moveVerticallyByChildWidth = 0.0,
+    double moveHorizontallyByChildHeight = 0.0,
+    double moveVerticallyByContainerWidth = 0.0,
+    double moveHorizontallyByContainerHeight = 0.0,
     double childWidth,
     double childHeight,
     double minChildWidth,
@@ -162,6 +175,10 @@ class AlignPositioned extends SingleChildRenderObjectWidget {
             moveByChildHeight: moveByChildHeight,
             moveByContainerWidth: moveByContainerWidth,
             moveByContainerHeight: moveByContainerHeight,
+            moveVerticallyByChildWidth: moveVerticallyByChildWidth,
+            moveHorizontallyByChildHeight: moveHorizontallyByChildHeight,
+            moveVerticallyByContainerWidth: moveVerticallyByContainerWidth,
+            moveHorizontallyByContainerHeight: moveHorizontallyByContainerHeight,
             childWidth: childWidth,
             childHeight: childHeight,
             minChildWidth: minChildWidth,
@@ -208,6 +225,10 @@ class AlignPositioned extends SingleChildRenderObjectWidget {
     double moveByChildHeight = 0.0,
     double moveByContainerWidth = 0.0,
     double moveByContainerHeight = 0.0,
+    double moveVerticallyByChildWidth = 0.0,
+    double moveHorizontallyByChildHeight = 0.0,
+    double moveVerticallyByContainerWidth = 0.0,
+    double moveHorizontallyByContainerHeight = 0.0,
     double childWidth,
     double childHeight,
     double minChildWidth,
@@ -236,6 +257,10 @@ class AlignPositioned extends SingleChildRenderObjectWidget {
         moveByChildHeight: moveByChildHeight,
         moveByContainerWidth: moveByContainerWidth,
         moveByContainerHeight: moveByContainerHeight,
+        moveVerticallyByChildWidth: moveVerticallyByChildWidth,
+        moveHorizontallyByChildHeight: moveHorizontallyByChildHeight,
+        moveVerticallyByContainerWidth: moveVerticallyByContainerWidth,
+        moveHorizontallyByContainerHeight: moveHorizontallyByContainerHeight,
         childWidth: childWidth,
         childHeight: childHeight,
         minChildWidth: minChildWidth,
@@ -266,6 +291,10 @@ class AlignPositioned extends SingleChildRenderObjectWidget {
       moveByChildHeight: moveByChildHeight ?? 0.0,
       moveByContainerWidth: moveByContainerWidth ?? 0.0,
       moveByContainerHeight: moveByContainerHeight ?? 0.0,
+      moveVerticallyByChildWidth: moveVerticallyByChildWidth ?? 0.0,
+      moveHorizontallyByChildHeight: moveHorizontallyByChildHeight ?? 0.0,
+      moveVerticallyByContainerWidth: moveVerticallyByContainerWidth ?? 0.0,
+      moveHorizontallyByContainerHeight: moveHorizontallyByContainerHeight ?? 0.0,
       touch: touch,
       childWidth: childWidth,
       childHeight: childHeight,
@@ -296,6 +325,10 @@ class AlignPositioned extends SingleChildRenderObjectWidget {
       ..moveByChildHeight = moveByChildHeight ?? 0.0
       ..moveByContainerWidth = moveByContainerWidth ?? 0.0
       ..moveByContainerHeight = moveByContainerHeight ?? 0.0
+      ..moveVerticallyByChildWidth = moveVerticallyByChildWidth ?? 0.0
+      ..moveHorizontallyByChildHeight = moveHorizontallyByChildHeight ?? 0.0
+      ..moveVerticallyByContainerWidth = moveVerticallyByContainerWidth ?? 0.0
+      ..moveHorizontallyByContainerHeight = moveHorizontallyByContainerHeight ?? 0.0
       ..childWidth = childWidth
       ..childHeight = childHeight
       ..minChildWidth = minChildWidth
@@ -327,6 +360,10 @@ class _RenderAlignPositionedBox extends RenderShiftedBox {
     @required double moveByChildHeight,
     @required double moveByContainerWidth,
     @required double moveByContainerHeight,
+    @required double moveVerticallyByChildWidth,
+    @required double moveHorizontallyByChildHeight,
+    @required double moveVerticallyByContainerWidth,
+    @required double moveHorizontallyByContainerHeight,
     @required double childWidth,
     @required double childHeight,
     @required double minChildWidth,
@@ -354,6 +391,10 @@ class _RenderAlignPositionedBox extends RenderShiftedBox {
         _moveByChildHeight = moveByChildHeight,
         _moveByContainerWidth = moveByContainerWidth,
         _moveByContainerHeight = moveByContainerHeight,
+        _moveVerticallyByChildWidth = moveVerticallyByChildWidth,
+        _moveHorizontallyByChildHeight = moveHorizontallyByChildHeight,
+        _moveVerticallyByContainerWidth = moveVerticallyByContainerWidth,
+        _moveHorizontallyByContainerHeight = moveHorizontallyByContainerHeight,
         _alignment = alignment,
         _childWidth = childWidth,
         _childHeight = childHeight,
@@ -598,6 +639,54 @@ class _RenderAlignPositionedBox extends RenderShiftedBox {
 
   // ---
 
+  double get moveVerticallyByChildWidth => _moveVerticallyByChildWidth;
+  double _moveVerticallyByChildWidth;
+
+  set moveVerticallyByChildWidth(double value) {
+    assert(value != null);
+    if (_moveVerticallyByChildWidth == value) return;
+    _moveVerticallyByChildWidth = value;
+    markNeedsLayout();
+  }
+
+  // ---
+
+  double get moveHorizontallyByChildHeight => _moveHorizontallyByChildHeight;
+  double _moveHorizontallyByChildHeight;
+
+  set moveHorizontallyByChildHeight(double value) {
+    assert(value != null);
+    if (_moveHorizontallyByChildHeight == value) return;
+    _moveHorizontallyByChildHeight = value;
+    markNeedsLayout();
+  }
+
+  // ---
+
+  double get moveVerticallyByContainerWidth => _moveVerticallyByContainerWidth;
+  double _moveVerticallyByContainerWidth;
+
+  set moveVerticallyByContainerWidth(double value) {
+    assert(value != null);
+    if (_moveVerticallyByContainerWidth == value) return;
+    _moveVerticallyByContainerWidth = value;
+    markNeedsLayout();
+  }
+
+  // ---
+
+  double get moveHorizontallyByContainerHeight => _moveHorizontallyByContainerHeight;
+  double _moveHorizontallyByContainerHeight;
+
+  set moveHorizontallyByContainerHeight(double value) {
+    assert(value != null);
+    if (_moveHorizontallyByContainerHeight == value) return;
+    _moveHorizontallyByContainerHeight = value;
+    markNeedsLayout();
+  }
+
+  // ---
+
   double get dx => _dx;
   double _dx;
 
@@ -837,16 +926,18 @@ class _RenderAlignPositionedBox extends RenderShiftedBox {
     // 2) Adds dx and dy.
     childParentData.offset += Offset(dx, dy);
 
-    // 3) Adds moveByChildWidth and moveByChildHeight.
+    // 3) Adds moveByChildWidth and moveByChildHeight
+    // (and their orthogonal counterparts).
     childParentData.offset += Offset(
-      child.size.width * moveByChildWidth,
-      child.size.height * moveByChildHeight,
+      child.size.width * moveByChildWidth + child.size.height * moveHorizontallyByChildHeight,
+      child.size.height * moveByChildHeight + child.size.width * moveVerticallyByChildWidth,
     );
 
     // 4) Adds moveByContainerWidth and moveByContainerHeight.
+    // (and their orthogonal counterparts).
     childParentData.offset += Offset(
-      size.width * moveByContainerWidth,
-      size.height * moveByContainerHeight,
+      size.width * moveByContainerWidth + size.height * moveHorizontallyByContainerHeight,
+      size.height * moveByContainerHeight + size.width * moveVerticallyByContainerWidth,
     );
   }
 

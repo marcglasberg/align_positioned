@@ -58,6 +58,10 @@ and then one or more of the following parameters:
        moveByChildHeight: ...,
        moveByContainerWidth: ...,
        moveByContainerHeight: ...,
+       moveVerticallyByChildWidth: ...,
+       moveHorizontallyByChildHeight: ...,
+       moveVerticallyByContainerWidth: ...,
+       moveHorizontallyByContainerHeight: ...,
        childWidth: ...,
        childHeight: ...,
        minChildWidth: ...,
@@ -106,11 +110,19 @@ center touch the right side of the container (it touches the container from the 
 Parameters `dx` and `dy` can be positive or negative, and move the child horizontally and
 vertically, in pixels.
 
-Parameters `moveByChildWidth` and `moveByChildHeight` can be positive or negative, and move the child
-horizontally and vertically, but the unit here is not pixels, but child widths and heights.
+Parameters `moveByChildWidth` and `moveByChildHeight` can be positive or negative, and move the 
+child horizontally and vertically, but the unit here is not pixels, but child widths and heights.
 
-Parameters `moveByContainerWidth` and `moveByContainerHeight` can be positive or negative, and move the child
-horizontally and vertically, but the unit here is not pixels, but container widths and heights.
+Parameters `moveByContainerWidth` and `moveByContainerHeight` can be positive or negative, 
+and move the child horizontally and vertically, but the unit here is not pixels, 
+but container widths and heights.
+
+Parameters `moveVerticallyByChildWidth`, `moveHorizontallyByChildHeight`,
+`moveVerticallyByContainerWidth` and `moveHorizontallyByContainerHeight` allow you 
+to move in some direction according to the size (width or height) of the
+orthogonal direction. 
+For example, while `moveByChildWidth: 0.2` would move **horizontally** by 20% of the child's **width**, 
+`moveVerticallyByChildWidth` would move **vertically** by 20% of the child's **width**.
 
 
 ## Align and Position Examples

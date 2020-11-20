@@ -20,6 +20,12 @@ class AnimatedAlignPositioned extends ImplicitlyAnimatedWidget {
       moveByContainerWidth,
       moveByContainerHeight;
 
+  /// Position moving orthogonally.
+  final double moveVerticallyByChildWidth,
+      moveHorizontallyByChildHeight,
+      moveVerticallyByContainerWidth,
+      moveHorizontallyByContainerHeight;
+
   /// You may define preferred child sizes, in absolute terms, or relative to the container size.
   /// If you define both, they will be added.
   final double childWidth, childHeight, childWidthRatio, childHeightRatio;
@@ -74,6 +80,10 @@ class AnimatedAlignPositioned extends ImplicitlyAnimatedWidget {
     this.moveByChildHeight = 0.0,
     this.moveByContainerWidth = 0.0,
     this.moveByContainerHeight = 0.0,
+    this.moveVerticallyByChildWidth = 0.0,
+    this.moveHorizontallyByChildHeight = 0.0,
+    this.moveVerticallyByContainerWidth = 0.0,
+    this.moveHorizontallyByContainerHeight = 0.0,
     this.childWidth,
     this.childHeight,
     this.minChildWidth,
@@ -136,6 +146,10 @@ class _AnimatedAlignPositionedState //
   Tween<double> _moveByChildHeight;
   Tween<double> _moveByContainerWidth;
   Tween<double> _moveByContainerHeight;
+  Tween<double> _moveVerticallyByChildWidth;
+  Tween<double> _moveHorizontallyByChildHeight;
+  Tween<double> _moveVerticallyByContainerWidth;
+  Tween<double> _moveHorizontallyByContainerHeight;
   Tween<double> _childWidth;
   Tween<double> _childHeight;
   Tween<double> _minChildWidth;
@@ -186,6 +200,26 @@ class _AnimatedAlignPositionedState //
     _moveByContainerHeight = visitor(
       _moveByContainerHeight,
       widget.moveByContainerHeight,
+      (dynamic value) => Tween<double>(begin: value),
+    );
+    _moveVerticallyByChildWidth = visitor(
+      _moveVerticallyByChildWidth,
+      widget.moveVerticallyByChildWidth,
+      (dynamic value) => Tween<double>(begin: value),
+    );
+    _moveHorizontallyByChildHeight = visitor(
+      _moveHorizontallyByChildHeight,
+      widget.moveHorizontallyByChildHeight,
+      (dynamic value) => Tween<double>(begin: value),
+    );
+    _moveVerticallyByContainerWidth = visitor(
+      _moveVerticallyByContainerWidth,
+      widget.moveVerticallyByContainerWidth,
+      (dynamic value) => Tween<double>(begin: value),
+    );
+    _moveHorizontallyByContainerHeight = visitor(
+      _moveHorizontallyByContainerHeight,
+      widget.moveHorizontallyByContainerHeight,
       (dynamic value) => Tween<double>(begin: value),
     );
     _childWidth = visitor(
@@ -271,6 +305,10 @@ class _AnimatedAlignPositionedState //
       moveByChildHeight: _moveByChildHeight?.evaluate(animation),
       moveByContainerWidth: _moveByContainerWidth?.evaluate(animation),
       moveByContainerHeight: _moveByContainerHeight?.evaluate(animation),
+      moveVerticallyByChildWidth: _moveVerticallyByChildWidth?.evaluate(animation),
+      moveHorizontallyByChildHeight: _moveHorizontallyByChildHeight?.evaluate(animation),
+      moveVerticallyByContainerWidth: _moveVerticallyByContainerWidth?.evaluate(animation),
+      moveHorizontallyByContainerHeight: _moveHorizontallyByContainerHeight?.evaluate(animation),
       childWidth: _childWidth?.evaluate(animation),
       childHeight: _childHeight?.evaluate(animation),
       minChildWidth: _minChildWidth?.evaluate(animation),
