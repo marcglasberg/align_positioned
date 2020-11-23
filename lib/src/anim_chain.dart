@@ -61,10 +61,12 @@ class AnimChain extends StatefulWidget {
   final List<Duration> durations;
 
   AnimChain({
+    Key key,
     this.repeat,
     this.initialDelay,
   })  : widgets = [],
-        durations = [];
+        durations = [],
+        super(key: key);
 
   /// Define the next [widget] in the chain. The [wait] parameter specifies for
   /// how long it should be displayed.
@@ -100,7 +102,6 @@ class _AnimChainState extends State<AnimChain> {
 
   void _next() {
     var duration = widget.durations[count];
-
 
     if (applyInitialDelay && widget.initialDelay != null) {
       applyInitialDelay = false;

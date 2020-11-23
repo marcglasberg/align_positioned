@@ -1,4 +1,4 @@
-## [1.2.13] - 2020/11/23
+## [1.2.14] - 2020/11/23
 
 * AnimChain.initialDelay (initial delay before starting the animation chain).    
 
