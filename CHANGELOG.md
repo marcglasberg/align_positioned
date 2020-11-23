@@ -1,3 +1,7 @@
+## [1.2.13] - 2020/11/23
+
+* AnimChain.initialDelay (initial delay before starting the animation chain).    
+
 ## [1.2.12] - 2020/11/20
 
 * moveVerticallyByChildWidth.

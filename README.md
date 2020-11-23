@@ -40,9 +40,9 @@ automatically, interpolating between the old and new parameter values.
 
 ## How it works
 
-Add align_positioned [as a dependency](https://pub.dartlang.org/packages/align_positioned#-installing-tab-)
-in your `pubspec.yaml` file,
-then import it:
+Add align_positioned 
+[as a dependency](https://pub.dartlang.org/packages/align_positioned#-installing-tab-)
+in your `pubspec.yaml` file, then import it:
 
     import 'package:align_positioned/align_positioned.dart';
 
@@ -154,8 +154,8 @@ Then, to move the child one container width to the right, and one container heig
        moveByContainerWidth: 1.0, // Move one container width to the right.
        moveByContainerHeight: 1.0); // Move one container height to the bottom.
 
-Please, check the [example tab](https://pub.dartlang.org/packages/align_positioned#-example-tab-)
-for the effects seen below:
+Please <a href="https://github.com/marcglasberg/align_positioned/blob/master/example/lib/main.dart">try the example</a>
+that showcases the effects seen below:
 
 ![](./example/lib/alignPos3.png)
 
@@ -294,41 +294,76 @@ If you change the `AnimatedAlignPositioned` parameters it will animate automatic
             ),
         );
 
-## Chained Implicit Animation
+## How to Chain Implicit Animation Widgets
 
-Or you can chain widgets together so that even the change of parameters is automatic:
+The `AnimChain` widget lets you define a sequence of widgets, 
+where each one will be displayed after the previous after some wait time. 
 
-    return AnimChain(repeat: true)
-       // Show the yellow box and wait 5 seconds.
-       .next(
-          wait: Duration(seconds: 5),
-          widget: AnimatedAlignPositioned(
-             alignment: Alignment.bottomCenter,
-             rotateDegrees: 0,
-             child: Container(color: Colors.yellow),
-             ),
-          )
-       // Rotate to the red box in 3 seconds.
-       .next(
-          wait: Duration(seconds: 3),
-          widget: AnimatedAlignPositioned(
-             duration: Duration(seconds: 3),
-             rotateDegrees: 180,
-             child: Container(color: Colors.red),
-             ),
-          )
-       // Finally, translate the blue in the vertical axis.
-       .next(
-          widget: AnimatedAlignPositioned(
-             duration: Duration(seconds: 15),
-             alignment: Alignment.bottomCenter,
-             dy: 150,
-             rotateDegrees: 180,
-             child: Container(color: Colors.blue),
-             ),
-          ),
-        );
+You can chain widgets which are totally different from one another. For example:
 
+```dart
+AnimChain(repeat: true, initialDelay: Duration(milliseconds: 150))
+
+      // Yellow box for 700 milliseconds
+      .next(
+        wait: Duration(milliseconds: 700),
+        widget: Container(color: Colors.yellow, width: 95, height: 95, margin: const EdgeInsets.all(2.5)))
+      
+      // Red text for 1000 milliseconds
+      .next(
+        wait: Duration(milliseconds: 1000),
+        widget: Container(child: Text("Hello world!", style: TextStyle(color: Colors.red, fontSize: 25)), width: 100, height: 100))
+
+      // Blue icon for 1200 milliseconds
+      .next(
+        wait: Duration(milliseconds: 1200),
+        widget: Icon(Icons.accessibility, color: Colors.blue, size: 100));
+```      
+
+Try <a href="https://github.com/marcglasberg/align_positioned/blob/master/example/lib/main_anim_chain_any_widgets.dart">running the example</a>.
+
+<br>
+           
+However, if you define implicitly animated widgets 
+(like `AnimatedAlignPositioned`, `AnimatedContainer`, `AnimatedOpacity`, `AnimatedPadding` etc) 
+then you can easily create a smooth animation.
+
+For example:
+
+```dart
+return AnimChain(repeat: true, initialDelay: Duration(milliseconds: 150))
+   // Show the yellow box and wait 5 seconds.
+   .next(
+      wait: Duration(seconds: 5),
+      widget: AnimatedAlignPositioned(
+         alignment: Alignment.bottomCenter,
+         rotateDegrees: 0,
+         child: Container(color: Colors.yellow),
+         ),
+      )
+   // Rotate to the red box in 3 seconds.
+   .next(
+      wait: Duration(seconds: 3),
+      widget: AnimatedAlignPositioned(
+         duration: Duration(seconds: 3),
+         rotateDegrees: 180,
+         child: Container(color: Colors.red),
+         ),
+      )
+   // Finally, translate the blue in the vertical axis.
+   .next(
+      widget: AnimatedAlignPositioned(
+         duration: Duration(seconds: 15),
+         alignment: Alignment.bottomCenter,
+         dy: 150,
+         rotateDegrees: 180,
+         child: Container(color: Colors.blue),
+         ),
+      ),
+    );
+```      
+
+Try <a href="https://github.com/marcglasberg/align_positioned/blob/master/example/lib/main_anim_chain.dart">running the example</a>.
 
 ***
 

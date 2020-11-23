@@ -9,7 +9,7 @@ class Demo extends StatelessWidget {
   Widget build(BuildContext context) {
     //
     return Scaffold(
-      appBar: AppBar(title: const Text('AnimatedAlignPositioned Example')),
+      appBar: AppBar(title: const Text('AnimaChain + AnimatedAlignPositioned')),
       body: Container(
         color: Colors.grey,
         alignment: Alignment.center,
