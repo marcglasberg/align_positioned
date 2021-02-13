@@ -13,16 +13,16 @@ class Demo extends StatefulWidget {
 }
 
 class _DemoState extends State<Demo> {
-  ScrollController controller;
-  bool forward;
-  int frame;
+  late ScrollController controller;
+  late bool forward;
+  late int frame;
 
   @override
   void initState() {
     super.initState();
     controller = ScrollController();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
       controller.animateTo(3000, duration: Duration(seconds: 35), curve: Curves.easeIn);
     });
 
@@ -512,10 +512,10 @@ class _DemoState extends State<Demo> {
     Touch touch,
     int dirX,
     int dirY, {
-    double dx,
-    double dy,
-    double moveByChildWidth,
-    double moveByChildHeight,
+    double? dx,
+    double? dy,
+    double? moveByChildWidth,
+    double? moveByChildHeight,
   }) {
     return <Widget>[
       for (double i = 0.0; i <= 1.0; i += 0.1)
@@ -625,10 +625,10 @@ class _DemoState extends State<Demo> {
     int dirX,
     int dirY,
     Touch touch,
-    double dx,
-    double dy,
-    double moveByChildWidth,
-    double moveByChildHeight,
+    double? dx,
+    double? dy,
+    double? moveByChildWidth,
+    double? moveByChildHeight,
   ) {
     return AnimatedAlignPositioned(
         duration: Duration(seconds: 1),

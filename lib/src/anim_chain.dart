@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 // ////////////////////////////////////////////////////////////////////////////
@@ -54,15 +53,15 @@ class AnimChain extends StatefulWidget {
   /// will not be repeated when [repeat] is true. For this reason, it is
   /// different from the delay you can apply when you use the [wait] parameter
   /// of the [next] method, which is repeated.
-  final Duration initialDelay;
+  final Duration? initialDelay;
 
   // Each widget.
   final List<Widget> widgets;
   final List<Duration> durations;
 
   AnimChain({
-    Key key,
-    this.repeat,
+    Key? key,
+    this.repeat = false,
     this.initialDelay,
   })  : widgets = [],
         durations = [],
@@ -71,12 +70,9 @@ class AnimChain extends StatefulWidget {
   /// Define the next [widget] in the chain. The [wait] parameter specifies for
   /// how long it should be displayed.
   AnimChain next({
-    Widget widget,
-    Duration wait,
+    required Widget widget,
+    Duration wait = const Duration(),
   }) {
-    assert(widget != null);
-    assert(wait != null);
-
     widgets.add(widget);
     durations.add(wait);
     return this;
@@ -89,8 +85,8 @@ class AnimChain extends StatefulWidget {
 // ////////////////////////////////////////////////////////////////////////////
 
 class _AnimChainState extends State<AnimChain> {
-  int count;
-  bool applyInitialDelay;
+  late int count;
+  late bool applyInitialDelay;
 
   @override
   void initState() {
@@ -105,13 +101,10 @@ class _AnimChainState extends State<AnimChain> {
 
     if (applyInitialDelay && widget.initialDelay != null) {
       applyInitialDelay = false;
-      duration += widget.initialDelay;
+      duration += widget.initialDelay!;
     }
 
-    if (duration == null)
-      WidgetsBinding.instance.addPostFrameCallback((_) => _nextCount());
-    else
-      Timer(duration, _nextCount);
+    Timer(duration, _nextCount);
   }
 
   void _nextCount() {

@@ -1,14 +1,15 @@
 import 'package:align_positioned/align_positioned.dart';
 import 'package:flutter/material.dart';
-import 'package:matrix4_transform/matrix4_transform.dart';
 
 void main() async => runApp(MaterialApp(home: Demo()));
 
+/// Displays a checkmark.
 class Demo extends StatelessWidget {
   //
   static const angle = 135.0;
 
-  /// Thickness in relation to the height.
+  // Thickness in relation to the height.
+  // Change this from 0.0 (thin) to 0.35 (thick).
   static const thickness = 0.15;
 
   @override
@@ -58,9 +59,10 @@ class Demo extends StatelessWidget {
   }
 
   Widget rectangle(Color color) => Container(
-          decoration: BoxDecoration(
-        color: color,
-        border: Border.all(width: 1.0, color: Colors.black),
-        shape: BoxShape.rectangle,
-      ));
+        decoration: BoxDecoration(
+          color: color,
+          border: Border.all(width: 1.0, color: Colors.black),
+          shape: BoxShape.rectangle,
+        ),
+      );
 }

@@ -504,10 +504,10 @@ class Demo extends StatelessWidget {
     Touch touch,
     int dirX,
     int dirY, {
-    double dx,
-    double dy,
-    double moveByChildWidth,
-    double moveByChildHeight,
+    double? dx,
+    double? dy,
+    double? moveByChildWidth,
+    double? moveByChildHeight,
   }) {
     return <Widget>[
       for (double i = 0.0; i <= 1.0; i += 0.1)
@@ -568,10 +568,10 @@ class Demo extends StatelessWidget {
     int dirX,
     int dirY,
     Touch touch,
-    double dx,
-    double dy,
-    double moveByChildWidth,
-    double moveByChildHeight,
+    double? dx,
+    double? dy,
+    double? moveByChildWidth,
+    double? moveByChildHeight,
   ) {
     return AlignPositioned(
         child: circle(color),
