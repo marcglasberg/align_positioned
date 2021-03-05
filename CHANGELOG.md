@@ -1,3 +1,7 @@
+## [2.0.0] - 2021/03/05
+
+* Nullsafety.
+
 ## [1.2.15] - 2020/11/23
 
 * AnimChain.initialDelay (initial delay before starting the animation chain).    
