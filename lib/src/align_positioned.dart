@@ -895,8 +895,6 @@ class _RenderAlignPositionedBox extends RenderShiftedBox {
     final Offset containerSize = _toOffset(size);
     final Offset childSize = _toOffset(child!.size);
 
-    print('alignment = ${alignment}');
-
     // 1) Adds touch and alignment.
     if (_touch == Touch.inside)
       childParentData.offset = alignment.alongOffset(containerSize - childSize);
