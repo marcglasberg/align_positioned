@@ -837,7 +837,6 @@ class _RenderAlignPositionedBox extends RenderShiftedBox {
   void performLayout() {
     _checkConstraints();
 
-    print('_RenderAlignPositionedBox.performLayout --------------------------------');
     if (definesChildSize) {
       if (child != null) {
         child!.layout(_getInnerConstraints(constraints), parentUsesSize: true);
