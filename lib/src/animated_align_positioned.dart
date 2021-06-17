@@ -117,6 +117,97 @@ class AnimatedAlignPositioned extends ImplicitlyAnimatedWidget {
           curve: curve,
         );
 
+  /// Use this if you put an [AnimatedAlignPositioned] inside of a [Stack].
+  /// The [AnimatedAlignPositioned] will then expand and fix itself to the corners
+  /// of the [Stack]. The [Stack] will size itself to their other
+  /// non-positioned widgets, and then you can use the [AnimatedAlignPositioned]
+  /// to position its child in relation to the [Stack].
+  ///
+  /// Example:
+  /// ```
+  /// Stack(
+  ///   children: [
+  ///     AnimatedAlignPositioned.expand(child:...),
+  ///     ...
+  ///     ]);
+  /// ```
+  ///
+  /// Note the [Stack] documentation contains this text:
+  /// ```
+  /// In particular, when using a [Stack] you can't position
+  /// children relative to their size or the stack's own size.
+  /// ```
+  ///
+  /// However, using [AnimatedAlignPositioned] like this will allow you precisely that:
+  /// to position (and size) children relative to their size or the stack's own size.
+  ///
+  static Positioned expand({
+    Key? key,
+    Widget? child,
+    Alignment? alignment,
+    double? dx,
+    double? dy,
+    double? moveByChildWidth,
+    double? moveByChildHeight,
+    double? moveByContainerWidth,
+    double? moveByContainerHeight,
+    double? moveVerticallyByChildWidth,
+    double? moveHorizontallyByChildHeight,
+    double? moveVerticallyByContainerWidth,
+    double? moveHorizontallyByContainerHeight,
+    double? childWidth,
+    double? childHeight,
+    double? minChildWidth,
+    double? minChildHeight,
+    double? maxChildWidth,
+    double? maxChildHeight,
+    double? childWidthRatio,
+    double? childHeightRatio,
+    double? minChildWidthRatio,
+    double? minChildHeightRatio,
+    double? maxChildWidthRatio,
+    double? maxChildHeightRatio,
+    double? rotateDegrees,
+    Matrix4Transform? matrix4Transform,
+    Wins wins = Wins.min,
+    Touch touch = Touch.inside,
+  }) =>
+      Positioned(
+          top: 0,
+          right: 0,
+          left: 0,
+          bottom: 0,
+          child: AnimatedAlignPositioned(
+            child: child,
+            alignment: alignment,
+            dx: dx,
+            dy: dy,
+            moveByChildWidth: moveByChildWidth,
+            moveByChildHeight: moveByChildHeight,
+            moveByContainerWidth: moveByContainerWidth,
+            moveByContainerHeight: moveByContainerHeight,
+            moveVerticallyByChildWidth: moveVerticallyByChildWidth,
+            moveHorizontallyByChildHeight: moveHorizontallyByChildHeight,
+            moveVerticallyByContainerWidth: moveVerticallyByContainerWidth,
+            moveHorizontallyByContainerHeight: moveHorizontallyByContainerHeight,
+            childWidth: childWidth,
+            childHeight: childHeight,
+            minChildWidth: minChildWidth,
+            minChildHeight: minChildHeight,
+            maxChildWidth: maxChildWidth,
+            maxChildHeight: maxChildHeight,
+            childWidthRatio: childWidthRatio,
+            childHeightRatio: childHeightRatio,
+            minChildWidthRatio: minChildWidthRatio,
+            minChildHeightRatio: minChildHeightRatio,
+            maxChildWidthRatio: maxChildWidthRatio,
+            maxChildHeightRatio: maxChildHeightRatio,
+            rotateDegrees: rotateDegrees,
+            matrix4Transform: matrix4Transform,
+            wins: wins,
+            touch: touch,
+          ));
+
   @override
   _AnimatedAlignPositionedState createState() => //
       _AnimatedAlignPositionedState();

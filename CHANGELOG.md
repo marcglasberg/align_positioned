@@ -1,3 +1,7 @@
+## [2.0.2] - 2021/06/17
+
+* Added AnimatedAlignPositioned.expand().
+
 ## [2.0.1] - 2021/04/16
 
 * Details.
