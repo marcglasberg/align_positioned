@@ -143,6 +143,8 @@ class AnimatedAlignPositioned extends ImplicitlyAnimatedWidget {
   ///
   static Positioned expand({
     Key? key,
+    Duration duration = const Duration(milliseconds: 300),
+    Curve curve = Curves.easeInOut,
     Widget? child,
     Alignment? alignment,
     double? dx,
@@ -178,6 +180,8 @@ class AnimatedAlignPositioned extends ImplicitlyAnimatedWidget {
           left: 0,
           bottom: 0,
           child: AnimatedAlignPositioned(
+            duration: duration,
+            curve: curve,
             child: child,
             alignment: alignment,
             dx: dx,
