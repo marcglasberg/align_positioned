@@ -4,15 +4,8 @@ import 'package:flutter/rendering.dart';
 
 void main() async => runApp(MaterialApp(home: Demo()));
 
-/// Displays a checkmark.
+/// Demonstrates feeling a tap outside of the AlignPositioned area.
 class Demo extends StatefulWidget {
-  //
-  static const angle = 135.0;
-
-  // Thickness in relation to the height.
-  // Change this from 0.0 (thin) to 0.35 (thick).
-  static const thickness = 0.15;
-
   @override
   _DemoState createState() => _DemoState();
 }
@@ -32,12 +25,12 @@ class _DemoState extends State<Demo> {
                 'but it feels the tap both inside and outside of that area. '
                 'Tap it to see a color change.'
                 '\n\n'
-                'This is possible because the AlignPosition widget has a special hitText method '
+                'This is possible because the AlignPositioned widget has a special hitText method '
                 'which does not cull the tap position.'
                 '\n\n'
-                'However, all native Flutter widgets cull the tap position. If an AlignPosition '
+                'However, all native Flutter widgets cull the tap position. If an AlignPositioned '
                 'is inside a native Flutter widget parent, that parent will cull the tap position, '
-                'rendering the AlignPosition larger area useless. For more information, see:'
+                'rendering the AlignPositioned larger area useless. For more information, see:'
                 '\n\n'
                 '* https://github.com/flutter/flutter/issues/75747'
                 '\n'
@@ -125,9 +118,7 @@ class ColoredBox extends SingleChildRenderObjectWidget {
   /// Creates a widget that paints its area with the specified [Color].
   ///
   /// The [color] parameter must not be null.
-  const ColoredBox({required this.color, Widget? child, Key? key})
-      : assert(color != null),
-        super(key: key, child: child);
+  const ColoredBox({required this.color, Widget? child, Key? key}) : super(key: key, child: child);
 
   /// The color to paint the background area with.
   final Color color;
@@ -161,7 +152,6 @@ class _RenderColoredBox extends RenderProxyBoxWithHitTestBehavior {
   Color _color;
 
   set color(Color value) {
-    assert(value != null);
     if (value == _color) {
       return;
     }
