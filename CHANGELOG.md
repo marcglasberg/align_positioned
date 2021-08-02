@@ -1,3 +1,7 @@
+## [2.0.4] - 2021/08/01
+
+* Larger AlignPosition hitTest area.
+
 ## [2.0.3] - 2021/07/25
 
 * Added AnimatedAlignPositioned.expand().
@@ -12,16 +16,16 @@
 
 ## [1.2.15] - 2020/11/23
 
-* AnimChain.initialDelay (initial delay before starting the animation chain).    
+* AnimChain.initialDelay (initial delay before starting the animation chain).
 
 ## [1.2.12] - 2020/11/20
 
 * moveVerticallyByChildWidth.
 * moveHorizontallyByChildHeight.
-* moveVerticallyByContainerWidth. 
+* moveVerticallyByContainerWidth.
 * moveHorizontallyByContainerHeight.
 * Better treatment of null values in AnimatedAlignPositioned.
-  
+
 ## [1.2.9] - 2020/11/19
 
 * Touch.middle.

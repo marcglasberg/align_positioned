@@ -929,6 +929,51 @@ class _RenderAlignPositionedBox extends RenderShiftedBox {
 
   Offset _toOffset(Size size) => Offset(size.width, size.height);
 
+  /// This will hitTest children even if the tap is outside of the AlignPosition widget itself.
+  /// It other words, it prevents the culling of the tap position, thus allowing the children
+  /// who have been translated outside of the AlignPosition widget area to fell taps.
+  ///
+  /// Important: Unfortunately, the AlignPosition ancestors also cull the tap position.
+  /// For more information, see:
+  /// * https://github.com/flutter/flutter/issues/75747
+  /// * https://github.com/flutter/flutter/issues/19445
+  ///
+  bool hitTest(BoxHitTestResult result, {required Offset position}) {
+    assert(() {
+      if (!hasSize) {
+        if (debugNeedsLayout) {
+          throw FlutterError.fromParts(<DiagnosticsNode>[
+            ErrorSummary('Cannot hit test a render box that has never been laid out.'),
+            describeForError('The hitTest() method was called on this RenderBox'),
+            ErrorDescription("Unfortunately, this object's geometry is not known at this time, "
+                'probably because it has never been laid out. '
+                'This means it cannot be accurately hit-tested.'),
+            ErrorHint('If you are trying '
+                'to perform a hit test during the layout phase itself, make sure '
+                "you only hit test nodes that have completed layout (e.g. the node's "
+                'children, after their layout() method has been called).'),
+          ]);
+        }
+        throw FlutterError.fromParts(<DiagnosticsNode>[
+          ErrorSummary('Cannot hit test a render box with no size.'),
+          describeForError('The hitTest() method was called on this RenderBox'),
+          ErrorDescription('Although this node is not marked as needing layout, '
+              'its size is not set.'),
+          ErrorHint('A RenderBox object must have an '
+              'explicit size before it can be hit-tested. Make sure '
+              'that the RenderBox in question sets its size during layout.'),
+        ]);
+      }
+      return true;
+    }());
+
+    if (hitTestChildren(result, position: position) || hitTestSelf(position)) {
+      result.add(BoxHitTestEntry(this, position));
+      return true;
+    }
+    return false;
+  }
+
   @override
   bool hitTestChildren(BoxHitTestResult result, {required Offset position}) {
     return result.addWithPaintTransform(
