@@ -7,13 +7,13 @@ class Demo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //
-    // Center widget A, and then align B to the bottom of that.
+    // Center widget A, and then align B to the bottom of that (in the Y-axis).
     return Scaffold(
       appBar: AppBar(title: const Text('Center Below Example')),
       body: Center(
         child: AlignPositioned.relative(
-          widgetA(),
-          widgetB(),
+          container: widgetA(),
+          child: widgetB(),
           moveByContainerHeight: 0.5,
           moveByChildHeight: 0.5,
         ),

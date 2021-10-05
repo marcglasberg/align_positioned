@@ -10,10 +10,9 @@ Widgets in this package:
 
 **Why are these widgets an indispensable tool?**
 
-When your desired layout feels too complex for Columns and Rows,
-`AlignPositioned` is a real lifesaver. Flutter is very composable, which is good, but sometimes
-it's unnecessarily complex to translate some layout requirement into a composition of simpler
-widgets.
+When your desired layout feels too complex for Columns and Rows, `AlignPositioned` is a real
+lifesaver. Flutter is very composable, which is good, but sometimes it's unnecessarily complex to
+translate some layout requirement into a composition of simpler widgets.
 
 The `AlignPositioned` aligns, positions, sizes, rotates and transforms its child in relation to both
 the container and the child itself. In other words, it lets you **easily and directly** define where
@@ -30,9 +29,9 @@ Besides layout, `AlignPositioned` is specially helpful for **explicit animations
 you want for each frame. Without it, you may find yourself having to animate a composition of
 widgets.
 
-Meanwhile, `AnimatedAlignPositioned` and `AnimChain` widgets are helpful for **implicit animations**
-, which are very easy to create. If you change their parameters they animate automatically,
-interpolating between the old and new parameter values.
+Meanwhile, `AnimatedAlignPositioned` and `AnimChain` widgets are helpful for
+**implicit animations**, which are very easy to create. If you change their parameters they animate
+automatically, interpolating between the old and new parameter values.
 
 ## How it works
 
@@ -219,17 +218,22 @@ Use the `AlignPositioned.relative()` factory if you have a main widget, and you 
 position/size/rotate/translate another widget relative to the main one, but the second is **not** a
 child of the first.
 
-Example, to center the _main_ widget, and then put the
-_relative_ widget below it:
+Example, to center the main _container_ widget, and then put a relative _child_ widget vertically
+below it (in the Y-axis):
 
  ```
  Center(
     child: AlignPositioned.relative(
-        widgetA(),
-        widgetB(),
+        container: widgetA(),
+        child: widgetB(),
         moveByContainerHeight: 0.5,
         moveByChildHeight: 0.5));
  ```
+
+The `invert` parameter controls which widget overlaps the other. If `invert` is `false` (the
+default), the `container` widget is below the `child` widget in the Z-axis (will be painted before).
+If `invert` is true, the `container` widget to be on top of the `child` widget, in the Z-axis (will
+be painted after).
 
 ## Using AlignPositioned inside a Stack
 

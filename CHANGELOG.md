@@ -1,3 +1,22 @@
+## [3.0.0] - 2021/10/05
+
+* Breaking change: The two widgets in `AlignPositioned.relative()` are now named. To fix it, just
+  name the first one `container`, and the second one `child`. For example:
+
+  ```
+  Center(
+     child: AlignPositioned.relative(
+         container: widgetA(),
+         child: widgetB(),
+         moveByContainerHeight: 0.5,
+         moveByChildHeight: 0.5));
+  ```
+
+* `AlignPositioned.relative()` now has a parameter called `invert`, which controls which widget
+  overlaps the other. If `invert` is `false` (the default), the `container` widget is below
+  the `child` widget in the Z-axis (will be painted before). If `invert` is true, the `container`
+  widget to be on top of the `child` widget, in the Z-axis (will be painted after).
+
 ## [2.0.4] - 2021/08/01
 
 * Larger AlignPosition hitTest area.

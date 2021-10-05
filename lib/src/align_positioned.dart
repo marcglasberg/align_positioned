@@ -1,4 +1,5 @@
 import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:matrix4_transform/matrix4_transform.dart';
@@ -206,27 +207,34 @@ class AlignPositioned extends SingleChildRenderObjectWidget {
             touch: touch,
           ));
 
-  /// Use this if you have a main widget, and you want to
-  /// position/size/rotate/translate another widget relative
-  /// to the main one, but the second is NOT a child of the first.
+  /// Use this if you have a [container] widget, and you want to
+  /// position/size/rotate/translate another [child] widget relative
+  /// to the main one, but the second is NOT a real child of the first
+  /// (i.e., they are declared independently).
   ///
-  /// Example, to center the main widget, and then put the
-  /// relative widget below it:
+  /// For example, to center the main [container] widget, and then put
+  /// the relative [child] widget vertically below it:
   ///
   /// ```
   /// Center(
   ///    child: AlignPositioned.relative(
-  ///        widgetA(),
-  ///        widgetB(),
+  ///        container: widgetA(),
+  ///        child: widgetB(),
   ///        moveByContainerHeight: 0.5,
   ///        moveByChildHeight: 0.5));
   /// ```
   ///
-  static Widget relative(
-    Widget main,
-    Widget relative, {
+  /// The [invert] parameter controls which widget overlaps the other.
+  /// If [invert] is false (the default), the [container] widget is below the
+  /// [child] widget in the Z-axis (will be painted before). If [invert] is
+  /// true, the [container] widget to be on top of the [child] widget, in
+  /// the Z-axis (will be painted after).
+  ///
+  static Widget relative({
+    required Widget container,
+    required Widget child,
     Key? key,
-    Widget? child,
+    bool invert = false,
     Alignment? alignment,
     double? dx,
     double? dy,
@@ -255,39 +263,42 @@ class AlignPositioned extends SingleChildRenderObjectWidget {
     Wins wins = Wins.min,
     Touch touch = Touch.inside,
   }) {
-    return Stack(children: [
-      main,
-      AlignPositioned.expand(
-        child: relative,
-        alignment: alignment,
-        dx: dx,
-        dy: dy,
-        moveByChildWidth: moveByChildWidth,
-        moveByChildHeight: moveByChildHeight,
-        moveByContainerWidth: moveByContainerWidth,
-        moveByContainerHeight: moveByContainerHeight,
-        moveVerticallyByChildWidth: moveVerticallyByChildWidth,
-        moveHorizontallyByChildHeight: moveHorizontallyByChildHeight,
-        moveVerticallyByContainerWidth: moveVerticallyByContainerWidth,
-        moveHorizontallyByContainerHeight: moveHorizontallyByContainerHeight,
-        childWidth: childWidth,
-        childHeight: childHeight,
-        minChildWidth: minChildWidth,
-        minChildHeight: minChildHeight,
-        maxChildWidth: maxChildWidth,
-        maxChildHeight: maxChildHeight,
-        childWidthRatio: childWidthRatio,
-        childHeightRatio: childHeightRatio,
-        minChildWidthRatio: minChildWidthRatio,
-        minChildHeightRatio: minChildHeightRatio,
-        maxChildWidthRatio: maxChildWidthRatio,
-        maxChildHeightRatio: maxChildHeightRatio,
-        rotateDegrees: rotateDegrees,
-        matrix4Transform: matrix4Transform,
-        wins: wins,
-        touch: touch,
-      ),
-    ]);
+    return Stack(
+      children: [
+        if (!invert) container,
+        AlignPositioned.expand(
+          child: child,
+          alignment: alignment,
+          dx: dx,
+          dy: dy,
+          moveByChildWidth: moveByChildWidth,
+          moveByChildHeight: moveByChildHeight,
+          moveByContainerWidth: moveByContainerWidth,
+          moveByContainerHeight: moveByContainerHeight,
+          moveVerticallyByChildWidth: moveVerticallyByChildWidth,
+          moveHorizontallyByChildHeight: moveHorizontallyByChildHeight,
+          moveVerticallyByContainerWidth: moveVerticallyByContainerWidth,
+          moveHorizontallyByContainerHeight: moveHorizontallyByContainerHeight,
+          childWidth: childWidth,
+          childHeight: childHeight,
+          minChildWidth: minChildWidth,
+          minChildHeight: minChildHeight,
+          maxChildWidth: maxChildWidth,
+          maxChildHeight: maxChildHeight,
+          childWidthRatio: childWidthRatio,
+          childHeightRatio: childHeightRatio,
+          minChildWidthRatio: minChildWidthRatio,
+          minChildHeightRatio: minChildHeightRatio,
+          maxChildWidthRatio: maxChildWidthRatio,
+          maxChildHeightRatio: maxChildHeightRatio,
+          rotateDegrees: rotateDegrees,
+          matrix4Transform: matrix4Transform,
+          wins: wins,
+          touch: touch,
+        ),
+        if (invert) container,
+      ],
+    );
   }
 
   @override
@@ -389,7 +400,7 @@ class _RenderAlignPositionedBox extends RenderShiftedBox {
     required Wins wins,
     required Touch touch,
     required Alignment alignment,
-  })   : _dx = dx,
+  })  : _dx = dx,
         _dy = dy,
         _moveByChildWidth = moveByChildWidth,
         _moveByChildHeight = moveByChildHeight,
