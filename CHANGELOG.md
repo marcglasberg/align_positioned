@@ -1,3 +1,7 @@
+## [4.0.0] - 2024/01/09
+                 
+* Compatible with current Flutter version. 
+
 ## [3.0.0] - 2021/10/05
 
 * Breaking change: The two widgets in `AlignPositioned.relative()` are now named. To fix it, just

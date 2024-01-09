@@ -22,7 +22,7 @@ class _DemoState extends State<Demo> {
     super.initState();
     controller = ScrollController();
 
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       controller.animateTo(3000, duration: Duration(seconds: 35), curve: Curves.easeIn);
     });
 

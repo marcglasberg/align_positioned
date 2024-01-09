@@ -1,14 +1,14 @@
 name: align_positioned
-description: When your desired layout or animation is too complex for Columns and Rows, this widget is a life saver. It lets you declaratively position/size its child in complex ways.
-version: 3.0.0
+description: Greatly simplifies layouts which are difficult to implement with Columns and Rows, by letting you declaratively position and resize widgets in relation to one another.
+version: 4.0.0
 # author: Marcelo Glasberg <marcglasberg@gmail.com>
 homepage: https://github.com/marcglasberg/align_positioned
 
 environment:
-  sdk: '>=2.13.0 <3.0.0'
+  sdk: '>=3.2.0 <4.0.0'
 
 dependencies:
-  matrix4_transform: ^2.0.0
+  matrix4_transform: ^3.0.0
   flutter:
     sdk: flutter
 
