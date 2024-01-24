@@ -1,4 +1,4 @@
-## [4.0.0] - 2024/01/09
+## [4.0.1] - 2024/01/09
                  
 * Compatible with current Flutter version. 
 
