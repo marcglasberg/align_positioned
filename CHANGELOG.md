@@ -1,8 +1,14 @@
-## [4.0.1] - 2024/01/09
-                 
-* Compatible with current Flutter version. 
+## 5.0.0
 
-## [3.0.0] - 2021/10/05
+* Sponsored by [MyText.ai](https://mytext.ai)
+
+[![](./example/SponsoredByMyTextAi.png)](https://mytext.ai)
+
+## 4.0.1 
+                 
+* Compatible with current Flutter version, as of 2024/01/09. 
+
+## 3.0.0
 
 * Breaking change: The two widgets in `AlignPositioned.relative()` are now named. To fix it, just
   name the first one `container`, and the second one `child`. For example:
@@ -21,27 +27,27 @@
   the `child` widget in the Z-axis (will be painted before). If `invert` is true, the `container`
   widget to be on top of the `child` widget, in the Z-axis (will be painted after).
 
-## [2.0.4] - 2021/08/01
+## 2.0.4
 
 * Larger AlignPosition hitTest area.
 
-## [2.0.3] - 2021/07/25
+## 2.0.3
 
-* Added AnimatedAlignPositioned.expand().
+* Added `AnimatedAlignPositioned.expand()`.
 
-## [2.0.1] - 2021/04/16
+## 2.0.1
 
 * Details.
 
-## [2.0.0] - 2021/03/05
+## 2.0.0
 
 * Nullsafety.
 
-## [1.2.15] - 2020/11/23
+## 1.2.15
 
-* AnimChain.initialDelay (initial delay before starting the animation chain).
+* `AnimChain.initialDelay` (initial delay before starting the animation chain).
 
-## [1.2.12] - 2020/11/20
+## 1.2.12
 
 * moveVerticallyByChildWidth.
 * moveHorizontallyByChildHeight.
@@ -49,67 +55,52 @@
 * moveHorizontallyByContainerHeight.
 * Better treatment of null values in AnimatedAlignPositioned.
 
-## [1.2.9] - 2020/11/19
+## 1.2.9
 
-* Touch.middle.
+* `Touch.middle`.
 
-## [1.2.8] - 2020/09/14
-
-* Docs improvement.
-
-## [1.2.7] - 2020/07/27
+## 1.2.7
 
 * Better error message when AlignPositioned is given infinite size.
 
-## [1.2.6] - 2020/05/19
+## 1.2.6
 
 * Docs improvement.
 
-## [1.2.5] - 2019/09/10
-
-* Docs improvement.
-
-## [1.2.3] - 2019/09/10
+## 1.2.3
 
 * Removed reverseDuration.
 
-## [1.2.0] - 2019/08/29
+## 1.2.0
 
 * AlignPositioned.relative().
 
-## [1.1.9] - 2019/08/26
+## 1.1.9
 
 * AnimChain.
 
-## [1.1.8] - 2019/08/25
+## 1.1.8
 
 * AnimatedAlignPositioned.
 
-## [1.1.5] - 2019/08/23
+## 1.1.5
 
 * ChildHeightRatio and childHeight may be present at the same time.
 * Rotate.
 * Transform.
 
-## [1.1.0] - 2019/08/17
+## 1.1.0
 
-* AlignPositioned inside of a Stack.
+* AlignPositioned inside a Stack.
 
-## [1.0.8] - 2019/08/07
-
-* Better docs.
-
-## [1.0.7] - 2019/02/23
+## 1.0.7
 
 * Added size parameters.
 
-## [1.0.6] - 2019/02/23
+## 1.0.6
 
-* Added moveByContainerWidth and moveByContainerHeight.
+* Added `moveByContainerWidth` and `moveByContainerHeight`.
 
-## [1.0.5] - 2019/02/22
+## 1.0.5
 
 * Code and examples.
-
-
-
