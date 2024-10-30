@@ -1,6 +1,6 @@
 name: align_positioned
 description: Greatly simplifies layouts which are difficult to implement with Columns and Rows, by letting you declaratively position and resize widgets in relation to one another.
-version: 5.0.0
+version: 5.0.1
 # author: Marcelo Glasberg <marcglasberg@gmail.com>
 homepage: https://github.com/marcglasberg/align_positioned
 topics:
@@ -9,15 +9,13 @@ topics:
   - widgets
 
 environment:
-  sdk: '>=3.2.0 <4.0.0'
+  sdk: '>=3.5.0 <4.0.0'
 
 dependencies:
-  matrix4_transform: ^3.0.0
+  matrix4_transform: ^4.0.1
   flutter:
     sdk: flutter
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-flutter:
