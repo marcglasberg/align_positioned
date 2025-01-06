@@ -1,3 +1,5 @@
+#### Sponsor
+
 [![](./example/SponsoredByMyTextAi.png)](https://mytext.ai)
 
 [![pub package](https://img.shields.io/pub/v/align_positioned.svg)](https://pub.dartlang.org/packages/align_positioned)
@@ -147,8 +149,7 @@ Then, to move the child one container width to the right, and one container heig
        moveByContainerHeight: 1.0); // Move one container height to the bottom.
 
 Please <a href="https://github.com/marcglasberg/align_positioned/blob/master/example/lib/main.dart">
-try the example</a>
-that showcases the effects seen below:
+try the example</a> that showcases the effects seen below:
 
 ![](./example/lib/alignPos3.png)
 
