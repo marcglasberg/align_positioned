@@ -10,7 +10,9 @@ import 'package:matrix4_transform/matrix4_transform.dart';
 /// For more info, see: https://pub.dartlang.org/packages/align_positioned
 class AnimatedAlignPositioned extends ImplicitlyAnimatedWidget {
   //
-  final Alignment alignment;
+  /// Accepts both [Alignment] and [AlignmentDirectional].
+  /// See [AlignPositioned.alignment].
+  final AlignmentGeometry alignment;
 
   /// Position.
   final double dx,
@@ -73,7 +75,7 @@ class AnimatedAlignPositioned extends ImplicitlyAnimatedWidget {
     Duration duration = const Duration(milliseconds: 300),
     Curve curve = Curves.easeInOut,
     this.child,
-    Alignment? alignment,
+    AlignmentGeometry? alignment,
     double? dx,
     double? dy,
     double? moveByChildWidth,
@@ -146,7 +148,7 @@ class AnimatedAlignPositioned extends ImplicitlyAnimatedWidget {
     Duration duration = const Duration(milliseconds: 300),
     Curve curve = Curves.easeInOut,
     Widget? child,
-    Alignment? alignment,
+    AlignmentGeometry? alignment,
     double? dx,
     double? dy,
     double? moveByChildWidth,
@@ -242,7 +244,7 @@ class AnimatedAlignPositioned extends ImplicitlyAnimatedWidget {
 
 class _AnimatedAlignPositionedState //
     extends AnimatedWidgetBaseState<AnimatedAlignPositioned> {
-  AlignmentTween? _alignment;
+  AlignmentGeometryTween? _alignment;
   _TweenThatAcceptsNulls<double?>? _dx;
   _TweenThatAcceptsNulls<double?>? _dy;
   _TweenThatAcceptsNulls<double?>? _moveByChildWidth;
@@ -273,8 +275,8 @@ class _AnimatedAlignPositionedState //
     _alignment = visitor(
       _alignment,
       widget.alignment,
-      (dynamic value) => AlignmentTween(begin: value ?? Alignment.center),
-    ) as AlignmentTween?;
+      (dynamic value) => AlignmentGeometryTween(begin: value ?? Alignment.center),
+    ) as AlignmentGeometryTween?;
     _dx = visitor(
       _dx,
       widget.dx,

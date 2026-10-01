@@ -88,6 +88,11 @@ The `alignment` parameter works as expected. For example,
 represents the center of the container. The distance from -1.0 to +1.0 is the distance from one side
 of the rectangle to the other side of the rectangle.
 
+You can also use `AlignmentDirectional` (for example, `AlignmentDirectional.topStart`), which is
+resolved using the ambient `Directionality`, so it flips in right-to-left (RTL) languages. Note this
+only flips the alignment: `dx`, `moveByChildWidth` etc. are not flipped, and positive values always
+move the child to the right.
+
 If `touch` is `Touch.inside`, then `alignment` works just like the alignment for the `Align` widget,
 aligning the child inside the container.
 

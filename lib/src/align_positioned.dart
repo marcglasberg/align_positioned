@@ -17,7 +17,12 @@ enum Wins { min, max }
 /// For more info, see: https://pub.dartlang.org/packages/align_positioned
 class AlignPositioned extends SingleChildRenderObjectWidget {
   //
-  final Alignment alignment;
+  /// Accepts both [Alignment] and [AlignmentDirectional]. A directional
+  /// alignment (like `AlignmentDirectional.topStart`) is resolved using the
+  /// ambient [Directionality], so it flips in right-to-left locales.
+  /// Note `dx`, `moveByChildWidth` and the other horizontal moves are NOT
+  /// flipped: positive values always move the child to the right.
+  final AlignmentGeometry alignment;
 
   /// Position.
   final double dx,
@@ -76,7 +81,7 @@ class AlignPositioned extends SingleChildRenderObjectWidget {
   const AlignPositioned({
     Key? key,
     Widget? child,
-    Alignment? alignment,
+    AlignmentGeometry? alignment,
     double? dx,
     double? dy,
     double? moveByChildWidth,
@@ -143,7 +148,7 @@ class AlignPositioned extends SingleChildRenderObjectWidget {
   static Positioned expand({
     Key? key,
     Widget? child,
-    Alignment? alignment,
+    AlignmentGeometry? alignment,
     double? dx,
     double? dy,
     double? moveByChildWidth,
@@ -235,7 +240,7 @@ class AlignPositioned extends SingleChildRenderObjectWidget {
     required Widget child,
     Key? key,
     bool invert = false,
-    Alignment? alignment,
+    AlignmentGeometry? alignment,
     double? dx,
     double? dy,
     double? moveByChildWidth,
@@ -305,6 +310,7 @@ class AlignPositioned extends SingleChildRenderObjectWidget {
   _RenderAlignPositionedBox createRenderObject(BuildContext context) {
     return _RenderAlignPositionedBox(
       alignment: alignment,
+      textDirection: Directionality.maybeOf(context),
       dx: dx,
       dy: dy,
       moveByChildWidth: moveByChildWidth,
@@ -338,6 +344,7 @@ class AlignPositioned extends SingleChildRenderObjectWidget {
   void updateRenderObject(BuildContext context, _RenderAlignPositionedBox renderObject) {
     renderObject
       ..alignment = alignment
+      ..textDirection = Directionality.maybeOf(context)
       ..dx = dx
       ..dy = dy
       ..moveByChildWidth = moveByChildWidth
@@ -399,7 +406,8 @@ class _RenderAlignPositionedBox extends RenderShiftedBox {
     required Matrix4Transform? matrix4Transform,
     required Wins wins,
     required Touch touch,
-    required Alignment alignment,
+    required AlignmentGeometry alignment,
+    required TextDirection? textDirection,
   })  : _dx = dx,
         _dy = dy,
         _moveByChildWidth = moveByChildWidth,
@@ -411,6 +419,7 @@ class _RenderAlignPositionedBox extends RenderShiftedBox {
         _moveVerticallyByContainerWidth = moveVerticallyByContainerWidth,
         _moveHorizontallyByContainerHeight = moveHorizontallyByContainerHeight,
         _alignment = alignment,
+        _textDirection = textDirection,
         _childWidth = childWidth,
         _childHeight = childHeight,
         _minChildWidth = minChildWidth,
@@ -581,14 +590,28 @@ class _RenderAlignPositionedBox extends RenderShiftedBox {
 
   // ---
 
-  Alignment get alignment => _alignment;
-  Alignment _alignment;
+  AlignmentGeometry get alignment => _alignment;
+  AlignmentGeometry _alignment;
 
-  set alignment(Alignment value) {
+  set alignment(AlignmentGeometry value) {
     if (_alignment == value) return;
     _alignment = value;
     markNeedsLayout();
   }
+
+  // ---
+
+  /// Only used to resolve a directional [alignment].
+  TextDirection? get textDirection => _textDirection;
+  TextDirection? _textDirection;
+
+  set textDirection(TextDirection? value) {
+    if (_textDirection == value) return;
+    _textDirection = value;
+    markNeedsLayout();
+  }
+
+  Alignment get _resolvedAlignment => _alignment.resolve(_textDirection);
 
   // ---
 
@@ -904,6 +927,7 @@ class _RenderAlignPositionedBox extends RenderShiftedBox {
     final BoxParentData childParentData = child!.parentData as BoxParentData;
     final Offset containerSize = _toOffset(size);
     final Offset childSize = _toOffset(child!.size);
+    final Alignment alignment = _resolvedAlignment;
 
     // 1) Adds touch and alignment.
     if (_touch == Touch.inside)
@@ -1017,7 +1041,7 @@ class _RenderAlignPositionedBox extends RenderShiftedBox {
   bool transformHitTests = true;
 
   Matrix4 get _effectiveTransform {
-    final Alignment resolvedAlignment = alignment;
+    final Alignment resolvedAlignment = _resolvedAlignment;
     if (_origin == null && resolvedAlignment == Alignment.topCenter) return transform;
     var origin = _origin;
     final Matrix4 result = Matrix4.identity();

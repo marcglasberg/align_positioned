@@ -1,3 +1,10 @@
+## 5.1.0
+
+* RTL support: The `alignment` parameter of `AlignPositioned` and `AnimatedAlignPositioned`
+  now accepts any `AlignmentGeometry`, so you can use `AlignmentDirectional.topStart` etc.
+  It's resolved using the ambient `Directionality`. Note `dx`, `moveByChildWidth` etc. are
+  not flipped in RTL.
+
 ## 5.0.1
 
 * Sponsored by [MyText.ai](https://mytext.ai)
