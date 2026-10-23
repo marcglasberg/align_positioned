@@ -30,7 +30,7 @@ class Demo extends StatelessWidget {
                   child: Stack(
                     children: [
                       AnimatedAlignPositioned(
-                        child: rectangle(Colors.red.withOpacity(0.7)),
+                        child: rectangle(Colors.red.withValues(alpha: 0.7)),
                         childWidthRatio: 0.8,
                         childHeightRatio: thickness,
                         moveByChildHeight: 0.5,
@@ -39,7 +39,7 @@ class Demo extends StatelessWidget {
                         rotateDegrees: angle,
                       ),
                       AnimatedAlignPositioned(
-                        child: rectangle(Colors.green.withOpacity(0.7)),
+                        child: rectangle(Colors.green.withValues(alpha: 0.7)),
                         rotateDegrees: 90 + angle,
                         childWidthRatio: 0.42,
                         childHeightRatio: thickness,

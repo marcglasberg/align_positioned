@@ -57,7 +57,7 @@ class _DemoState extends State<Demo> {
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                          color: (index % 2 == 0 ? Colors.blue : Colors.green).withOpacity(0.9),
+                          color: (index % 2 == 0 ? Colors.blue : Colors.green).withValues(alpha: 0.9),
                           border: Border.all(width: 1.0, color: Colors.black),
                           shape: BoxShape.circle,
                         ),
@@ -80,7 +80,7 @@ class _DemoState extends State<Demo> {
     VoidCallback? onTap,
   }) {
     Widget widget = ColoredBox(
-      color: color.withOpacity(0.7),
+      color: color.withValues(alpha: 0.7),
       child: child,
     );
 
@@ -96,7 +96,7 @@ class _DemoState extends State<Demo> {
     // }) {
     //   Widget widget = ColoredBox(
     //     decoration: BoxDecoration(
-    //       color: color.withOpacity(0.7),
+    //       color: color.withValues(alpha: 0.7),
     //       border: Border.all(width: 1.0, color: Colors.black),
     //       shape: round ? BoxShape.circle : BoxShape.rectangle,
     //     ),

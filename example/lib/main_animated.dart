@@ -252,7 +252,7 @@ class _DemoState extends State<Demo> {
                         alignment: Alignment.bottomLeft,
                         rotateDegrees: i * 3 / (frame / 3.0 + 1),
                         child: Container(
-                            color: Colors.black.withOpacity(i / 360 * .8), width: 100, height: 10),
+                            color: Colors.black.withValues(alpha: i / 360 * .8), width: 100, height: 10),
                       )
                   ],
                 ),
@@ -277,21 +277,21 @@ class _DemoState extends State<Demo> {
                       alignment: Alignment.center,
                       rotateDegrees: Random().nextDouble() * 360,
                       matrix4Transform: Matrix4Transform().scale(2),
-                      child: Container(color: Colors.green.withOpacity(0.5), width: 60, height: 20),
+                      child: Container(color: Colors.green.withValues(alpha: 0.5), width: 60, height: 20),
                     ),
                     AnimatedAlignPositioned(
                       duration: Duration(milliseconds: 1200),
                       alignment: Alignment.center,
                       rotateDegrees: Random().nextDouble() * 360,
                       matrix4Transform: Matrix4Transform().scale(2),
-                      child: Container(color: Colors.red.withOpacity(0.5), width: 60, height: 20),
+                      child: Container(color: Colors.red.withValues(alpha: 0.5), width: 60, height: 20),
                     ),
                     AnimatedAlignPositioned(
                       duration: Duration(milliseconds: 800),
                       alignment: Alignment.center,
                       rotateDegrees: Random().nextDouble() * 360,
                       matrix4Transform: Matrix4Transform().scale(2).rotateDegrees(90),
-                      child: Container(color: Colors.blue.withOpacity(0.5), width: 60, height: 20),
+                      child: Container(color: Colors.blue.withValues(alpha: 0.5), width: 60, height: 20),
                     ),
                   ],
                 ),
