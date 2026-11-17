@@ -1,6 +1,6 @@
 #### Sponsor
 
-[![](./example/SponsoredByMyTextAi.png)](https://mytext.ai)
+[![](./example/SponsoredByMyTextAi.jpg)](https://mytext.ai)
 
 [![pub package](https://img.shields.io/pub/v/align_positioned.svg)](https://pub.dartlang.org/packages/align_positioned)
 
