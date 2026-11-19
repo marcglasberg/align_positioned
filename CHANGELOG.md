@@ -1,3 +1,8 @@
+## 5.1.2
+
+* Use design-neutral Flutter widgets instead of the deprecated Material library.
+* Use matrix4_transform >=4.1.0; require Dart >=3.9.0 and Flutter >=3.35.0.
+
 ## 5.1.1
 
 * RTL support: The `alignment` parameter of `AlignPositioned` and `AnimatedAlignPositioned`
